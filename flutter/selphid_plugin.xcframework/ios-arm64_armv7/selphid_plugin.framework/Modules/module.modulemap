@@ -1,0 +1,11 @@
+framework module selphid_plugin {
+  umbrella header "selphid_plugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module selphid_plugin.Swift {
+    header "selphid_plugin-Swift.h"
+    requires objc
+}

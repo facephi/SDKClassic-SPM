@@ -1,0 +1,24 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
+// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name selphid_plugin
+import FPhiSelphIDWidgetiOS
+import Flutter
+import Foundation
+import Swift
+import _Concurrency
+@_exported import selphid_plugin
+@objc @_inheritsConvenienceInitializers public class SwiftSelphIdPlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension selphid_plugin.SwiftSelphIdPlugin : FPhiSelphIDWidgetiOS.FPhiSelphIDWidgetProtocol {
+  @objc dynamic public func captureFinished()
+  public func proccessImage(format: Swift.String, stream: UIKit.UIImage) -> Swift.String
+  @objc dynamic public func captureFailed(_ error: Swift.Error!)
+  @objc dynamic public func captureCancelled()
+  @objc dynamic public func captureTimeout()
+  @objc dynamic public func onEvent(_ time: Foundation.Date?, type: Swift.String?, info: Swift.String?)
+  public func getFlutterViewController() -> Flutter.FlutterViewController?
+}

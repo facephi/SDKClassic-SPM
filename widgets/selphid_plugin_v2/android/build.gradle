@@ -1,0 +1,52 @@
+group 'com.selphid.flutter.plugin.selphid_plugin'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.3'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+
+        maven {
+            url = 'https://maven.pkg.github.com/facephi/central-packages'
+            credentials {
+                username = "abueno@facephi.com"
+                password = "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"
+            }
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+
+dependencies {
+    //implementation fileTree(include: ['*.aar'], dir: 'src/main/libs')
+    implementation('com.facephi:fphi-selphid-core:1.11.7')
+    implementation('com.facephi:fphi-selphid-extractor:1.11.7')
+    implementation('com.facephi:fphi-selphid-drawer:1.11.7')
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+}

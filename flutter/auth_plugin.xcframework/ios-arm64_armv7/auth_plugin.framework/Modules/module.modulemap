@@ -1,0 +1,11 @@
+framework module auth_plugin {
+  umbrella header "auth_plugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module auth_plugin.Swift {
+    header "auth_plugin-Swift.h"
+    requires objc
+}

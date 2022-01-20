@@ -1,0 +1,20 @@
+package com.facephi.bridge_plugin.sdkmanager.data.request
+
+enum class TrackingDataEvent {
+    SCREEN_ACCESS,
+    CLICK_BUTTON,
+    STATE,
+    STATE_CHANGE,
+    STEP_CHANGE,
+    AUTHENTICATION_RESULT,
+    EXPIRED_BY_SCHEDULERCLICK,
+    SWIPE,
+    LICENSE_ERROR,
+    AUTO_CONFIGURE,
+    WIDGET_EXCEPTION,
+    FEATURE_NOT_SUPPORTED,
+    RECORDING,
+    RECORDING_FILE,
+    RECORDING_ERROR,
+    ONBOARDING_RESULT
+}

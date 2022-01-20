@@ -1,0 +1,11 @@
+framework module selphi_face_plugin {
+  umbrella header "selphi_face_plugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module selphi_face_plugin.Swift {
+    header "selphi_face_plugin-Swift.h"
+    requires objc
+}

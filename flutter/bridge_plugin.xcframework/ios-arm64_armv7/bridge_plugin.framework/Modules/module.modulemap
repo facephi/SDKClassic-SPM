@@ -1,0 +1,11 @@
+framework module bridge_plugin {
+  umbrella header "bridge_plugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module bridge_plugin.Swift {
+    header "bridge_plugin-Swift.h"
+    requires objc
+}

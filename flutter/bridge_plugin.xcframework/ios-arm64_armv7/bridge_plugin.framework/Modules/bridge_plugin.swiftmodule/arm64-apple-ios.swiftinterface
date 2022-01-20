@@ -1,0 +1,220 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name bridge_plugin
+import Flutter
+import Foundation
+import Swift
+import SystemConfiguration
+import UIKit
+import _Concurrency
+@_exported import bridge_plugin
+extension Swift.Encodable {
+  public var json: Swift.String? {
+    get
+  }
+}
+public enum FinishStatus : Swift.Int {
+  case STATUS_OK
+  case STATUS_ERROR
+  case STATUS_CANCEL_BY_USER
+  case STATUS_TIMEOUT
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum OnboardingType : Swift.String {
+  case ONBOARDING
+  case AUTHENTICATION
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ErrorType : Swift.Int {
+  case NETWORK_CONNECTION_ERROR
+  case TE_UNKNOWN_ERROR
+  case TE_NO_ERROR
+  case TE_CAMERA_PERMISSION_DENIED
+  case TE_SETTINGS_PERMISSION_ERROR
+  case TE_HARDWARE_ERROR
+  case TE_EXTRACTION_LICENSE_ERROR
+  case TE_UNEXPECTED_CAPTURE_ERROR
+  case TE_CONTROL_NOT_INITIALIZATED_ERROR
+  case TE_BAD_EXTRACTOR_CONFIGURATION_ERROR
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public class FacephiSdkManager {
+  public var delegate: bridge_plugin.FacephiSdkResponseProtocol? {
+    get
+    set
+  }
+  public init()
+  @objc deinit
+}
+extension bridge_plugin.FacephiSdkManager : bridge_plugin.FacephiSdkRequestProtocol {
+  public func tokenize(_ data: Swift.String)
+  public func initSession(withRequest request: bridge_plugin.InitSessionRequest)
+  public func initOnboardingProcess(withRequest request: bridge_plugin.InitOnboardingRequest)
+  public func launchSelphi(_ configuration: bridge_plugin.SelphiConfiguration)
+  public func launchSelphId(_ configuration: bridge_plugin.SelphIdConfiguration)
+  public func launchTracking(_ trackingData: bridge_plugin.TrackingData)
+  public func generateRawTemplate(imageBase64: Swift.String)
+  public func closeSession()
+}
+public protocol FacephiSdkRequestProtocol : AnyObject {
+  var delegate: bridge_plugin.FacephiSdkResponseProtocol? { get set }
+  func initSession(withRequest request: bridge_plugin.InitSessionRequest)
+  func initOnboardingProcess(withRequest request: bridge_plugin.InitOnboardingRequest)
+  func launchSelphi(_ configuration: bridge_plugin.SelphiConfiguration)
+  func launchSelphId(_ configuration: bridge_plugin.SelphIdConfiguration)
+  func launchTracking(_ trackingData: bridge_plugin.TrackingData)
+  func generateRawTemplate(imageBase64: Swift.String)
+  func closeSession()
+  func tokenize(_ data: Swift.String)
+}
+public protocol FacephiSdkResponseProtocol {
+  func getInitSessionResponse(_ response: bridge_plugin.SdkResponse)
+  func getInitOnboardingProcessResponse(_ response: bridge_plugin.SdkResponse)
+  func getSelphiResponse(_ response: bridge_plugin.SelphiResponse)
+  func getSelphIdResponse(_ response: bridge_plugin.SelphidResponse)
+  func getTrackingResponse(_ response: bridge_plugin.SdkResponse)
+  func getGenerateRawTemplateResponse(_ response: Swift.String)
+  func getCloseSessionResponse(_ response: bridge_plugin.SdkResponse)
+  func getTokenizedString(_ response: Swift.String)
+}
+public struct InitOnboardingRequest : Swift.Encodable {
+  public init(onboardingId: Swift.String, onboardingType: bridge_plugin.OnboardingType)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct InitSessionRequest : Swift.Encodable {
+  public init(sessionId: Swift.String, customerId: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class NetworkStatus {
+  @objc deinit
+}
+public struct SdkResponse : Swift.Codable {
+  public var finishStatus: Swift.Int
+  public var errorType: Swift.Int?
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum SelphiFaceLivenessMode : Swift.String {
+  case LM_PASSIVE
+  case LM_NONE
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct SelphiConfiguration : Swift.Codable {
+  public init(debug: Swift.Bool, fullscreen: Swift.Bool, crop: Swift.Bool, cropPercent: Swift.Double, sceneTimeout: Swift.Double, livenessMode: Swift.String, jpgQuality: Swift.Double, qrValidatorExpression: Swift.String, enableImages: Swift.Bool, uTags: Swift.String, frontalCameraPreferred: Swift.Bool, locale: Swift.String, stabilizationMode: Swift.Bool, templateRawOptimized: Swift.Bool, desiredCameraWidth: Swift.Int, desiredCameraHeight: Swift.Int, enableGenerateTemplateRaw: Swift.Bool, enableWidgetEventListener: Swift.Bool, qrMode: Swift.Bool, translationsContent: Swift.String, viewsContent: Swift.String)
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum SelphIDDocumentType : Swift.String {
+  case DT_IDCARD
+  case DT_PASSPORT
+  case DT_DRIVERSLICENSE
+  case DT_FOREIGNCARD
+  case DT_CREDITCARD
+  case DT_CUSTOM
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SelphIDTimeout : Swift.String {
+  case T_SHORT
+  case T_MEDIUM
+  case T_LONG
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SelphIDScanMode : Swift.String {
+  case CAP_MODE_GENERIC
+  case CAP_MODE_SPECIFIC
+  case CAP_MODE_SEARCH
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SelphIDCompressFormat : Swift.String {
+  case T_JPEG
+  case T_PNG
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct SelphIdConfiguration : Swift.Codable {
+  public init(debug: Swift.Bool, showResultAfterCapture: Swift.Bool, showTutorial: Swift.Bool, scanMode: Swift.String, specificData: Swift.String, fullscreen: Swift.Bool, tokenImageQuality: Swift.Double, locale: Swift.String, documentType: Swift.String, timeout: Swift.String, enableWidgetEventListener: Swift.Bool, generateRawImages: Swift.Bool, compressFormat: Swift.String, imageQuality: Swift.Int, translationsContent: Swift.String, viewsContent: Swift.String, documentModels: Swift.String, license: Swift.String)
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct SelphidResponse : Swift.Codable {
+  public var finishStatus: Swift.Int
+  public var errorType: Swift.Int
+  public init(from decoder: Swift.Decoder) throws
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct SelphiResponse : Swift.Codable {
+  public var finishStatus: Swift.Int
+  public var errorDiagnostic: Swift.Int
+  public init()
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@objc @_inheritsConvenienceInitializers public class SwiftBridgePlugin : ObjectiveC.NSObject, Flutter.FlutterPlugin {
+  @objc public static func register(with registrar: Flutter.FlutterPluginRegistrar)
+  @objc public func handle(_ call: Flutter.FlutterMethodCall, result: @escaping Flutter.FlutterResult)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct TrackingData : Swift.Codable {
+  public init(screen: Swift.String, event: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension bridge_plugin.FinishStatus : Swift.Equatable {}
+extension bridge_plugin.FinishStatus : Swift.Hashable {}
+extension bridge_plugin.FinishStatus : Swift.RawRepresentable {}
+extension bridge_plugin.OnboardingType : Swift.Equatable {}
+extension bridge_plugin.OnboardingType : Swift.Hashable {}
+extension bridge_plugin.OnboardingType : Swift.RawRepresentable {}
+extension bridge_plugin.ErrorType : Swift.Equatable {}
+extension bridge_plugin.ErrorType : Swift.Hashable {}
+extension bridge_plugin.ErrorType : Swift.RawRepresentable {}
+extension bridge_plugin.SelphiFaceLivenessMode : Swift.Equatable {}
+extension bridge_plugin.SelphiFaceLivenessMode : Swift.Hashable {}
+extension bridge_plugin.SelphiFaceLivenessMode : Swift.RawRepresentable {}
+extension bridge_plugin.SelphIDDocumentType : Swift.Equatable {}
+extension bridge_plugin.SelphIDDocumentType : Swift.Hashable {}
+extension bridge_plugin.SelphIDDocumentType : Swift.RawRepresentable {}
+extension bridge_plugin.SelphIDTimeout : Swift.Equatable {}
+extension bridge_plugin.SelphIDTimeout : Swift.Hashable {}
+extension bridge_plugin.SelphIDTimeout : Swift.RawRepresentable {}
+extension bridge_plugin.SelphIDScanMode : Swift.Equatable {}
+extension bridge_plugin.SelphIDScanMode : Swift.Hashable {}
+extension bridge_plugin.SelphIDScanMode : Swift.RawRepresentable {}
+extension bridge_plugin.SelphIDCompressFormat : Swift.Equatable {}
+extension bridge_plugin.SelphIDCompressFormat : Swift.Hashable {}
+extension bridge_plugin.SelphIDCompressFormat : Swift.RawRepresentable {}
