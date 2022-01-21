@@ -26,5 +26,6 @@ internal object Constants {
     const val onboardingFinishedMethod = "onboardingFinished"
     const val authenticationMethod = "authentication"
     const val authenticationFinishedMethod = "authenticationFinished"
+    const val trackingErrorFinishedMethod = "trackingErrorFinished"
 
 }

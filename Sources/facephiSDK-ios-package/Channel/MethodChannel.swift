@@ -4,14 +4,14 @@ typealias errorResponseMethodType = (_ args: Int) -> Void
 
 struct MethodChannel {
     // MARK: - VARS
-    var invokeMethodName: String
+    var invokeMethodName: String?
     var responseMethodName: String
-    var invokeMethodHandler: invokeMethodType
+    var invokeMethodHandler: invokeMethodType?
     var responseMethodHandler: responseMethodType
     var errorResponseMethodHandler: errorResponseMethodType?
 
     // MARK: - INIT
-    init(_ invokeMethodName: String, _ responseMethodName: String, _ invokeMethodHandler: @escaping invokeMethodType, _ responseMethodHandler: @escaping responseMethodType, _ errorResponseMethodHandler: errorResponseMethodType?) {
+    init(_ invokeMethodName: String?, _ responseMethodName: String, _ invokeMethodHandler: invokeMethodType?, _ responseMethodHandler: @escaping responseMethodType, _ errorResponseMethodHandler: errorResponseMethodType?) {
         self.invokeMethodName = invokeMethodName
         self.responseMethodName = responseMethodName
         self.invokeMethodHandler = invokeMethodHandler

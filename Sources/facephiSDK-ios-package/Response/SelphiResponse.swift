@@ -8,13 +8,19 @@
 import Foundation
 
 public struct SelphiResponse: Codable {
-    var errorMessage:String? = ""
-    var templateRaw = ""
-    var eyeGlassesScore: Double = 0.0
+    var errorMessage: String? = ""
+    var templateRaw: String? = ""
+    var eyeGlassesScore: Double? = 0.0
     var templateScore: Double? = 0.0
-    var qrData = ""
-    var bestImage = ""
-    var bestImageCropped = ""
+    var qrData: String? = ""
+    var bestImage: String? = ""
+    var bestImageCropped: String? = ""
+
+    public var shortDescription: String {
+        guard let safeTemplateRaw = templateRaw else { return "" }
+
+        return "SELPHI :\n templateRaw: \(safeTemplateRaw.prefix(20))..."
+    }
 
     public init() {}
 }

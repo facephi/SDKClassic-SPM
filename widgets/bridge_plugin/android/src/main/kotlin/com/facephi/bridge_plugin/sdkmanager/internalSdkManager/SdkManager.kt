@@ -72,6 +72,10 @@ internal class SdkManager(private val context: Context, private val contract: Fa
                     Log.d("SDK_MANAGER","-----> onMethodFinished: $method Result: $arguments")
                     contract.getAuthenticationResponse(Gson().fromJson(arguments, SdkResponse::class.java))
                 }
+                Constants.trackingErrorFinishedMethod -> {
+                    Log.d("SDK_MANAGER","-----> onMethodFinished: $method Result: $arguments")
+                    contract.getTrackingError(Gson().fromJson(arguments, SdkResponse::class.java))
+                }
                 else -> {
                     Log.d("SDK_MANAGER","-----> Else onMethodFinished: $method ")
                 }

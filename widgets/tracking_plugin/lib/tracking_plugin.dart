@@ -92,7 +92,7 @@ class TrackingPlugin {
       String brand,
       String deviceId,) async {
     TrackingEvent e = TrackingEvent(
-        family: 'DEVICE_TRACKING',
+        family: type,
         sessionId: sessionId,
         operationId: id,
         events: [
@@ -146,7 +146,19 @@ class TrackingPlugin {
         family: type,
         sessionId: sessionId,
         operationId: id,
-        events: [
+        events: [ Event(
+          eventId: const Uuid().v4(),
+          payload: Payload(
+            type: type,
+            event: 'STEP_CHANGE',
+            screen: "START",
+            value: "START"
+          ),
+          clientTimestamp: DateTime
+              .now()
+              .millisecondsSinceEpoch
+              .toString(),
+        ),
           Event(
             eventId: const Uuid().v4(),
             payload: Payload(
@@ -172,6 +184,19 @@ class TrackingPlugin {
         sessionId: sessionId,
         operationId: id,
         events: [
+          Event(
+            eventId: const Uuid().v4(),
+            payload: Payload(
+                type: type,
+                event: 'STEP_CHANGE',
+                screen: "START",
+                value: "START"
+            ),
+            clientTimestamp: DateTime
+                .now()
+                .millisecondsSinceEpoch
+                .toString(),
+          ),
           Event(
             eventId: const Uuid().v4(),
             payload: Payload(

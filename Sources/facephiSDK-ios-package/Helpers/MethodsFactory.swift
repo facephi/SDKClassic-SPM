@@ -13,9 +13,11 @@ class MethodsFactory
     enum InitMethodName: String
     {
         case initSession
-        case initOnboardingProcess
+        case initOperation
         case initSelphi
         case initSelphid
+        case onboarding
+        case authentication
         case addTracking
         case generateRawTemplate
         case closeSessionMethod
@@ -26,14 +28,17 @@ class MethodsFactory
     enum FinishMethodName: String
     {
         case initSessionFinished
-        case initOnboardingProcessFinished
+        case initOperationFinished
         case selphiFinished
         case selphidFinished
+        case onboardingFinished
         case trackingFinished
         case generateRawTemplateFinished
         case closeSessionFinishedMethod
         case tokenizeFinished
         case customerTrackingFinished
+        case authenticationFinished
+        case trackingErrorFinished
     }
 
     // MARK: - VARS
@@ -60,16 +65,16 @@ class MethodsFactory
 
         methods.append(methodSession)
 
-        let methodOnboarding = MethodChannel(InitMethodName.initOnboardingProcess.rawValue,
-                                             FinishMethodName.initOnboardingProcessFinished.rawValue,
-                                             channel.invoke,
-                                             { args in
-                                                 delegate.getInitOnboardingProcessResponse(args.toObject() ?? SdkResponse())
-                                             },
-                                             { args in
-                                                 delegate.getInitOnboardingProcessResponse(SdkResponse(withErrorType: args))
-                                             })
-        methods.append(methodOnboarding)
+        let methodOperation = MethodChannel(InitMethodName.initOperation.rawValue,
+                                            FinishMethodName.initOperationFinished.rawValue,
+                                            channel.invoke,
+                                            { args in
+                                                delegate.getInitOperationResponse(args.toObject() ?? SdkResponse())
+                                            },
+                                            { args in
+                                                delegate.getInitOperationResponse(SdkResponse(withErrorType: args))
+                                            })
+        methods.append(methodOperation)
 
         let methodSelphi = MethodChannel(InitMethodName.initSelphi.rawValue,
                                          FinishMethodName.selphiFinished.rawValue,
@@ -143,6 +148,37 @@ class MethodsFactory
                                                     delegate.getSetCustomerIdResponse(SdkResponse(withErrorType: args))
                                                 })
         methods.append(methodSetCustomerId)
+
+        let methodOnboarding = MethodChannel(InitMethodName.onboarding.rawValue,
+                                             FinishMethodName.onboardingFinished.rawValue,
+                                             channel.invoke,
+                                             { args in
+                                                 delegate.getOnboardingResponse(args.toObject() ?? SdkResponse())
+                                             },
+                                             { args in
+                                                 delegate.getOnboardingResponse(SdkResponse(withErrorType: args))
+                                             })
+        methods.append(methodOnboarding)
+
+        let methodAuthentication = MethodChannel(InitMethodName.authentication.rawValue,
+                                                 FinishMethodName.authenticationFinished.rawValue,
+                                                 channel.invoke,
+                                                 { args in
+                                                     delegate.getAuthenticationResponse(args.toObject() ?? SdkResponse())
+                                                 },
+                                                 { args in
+                                                     delegate.getAuthenticationResponse(SdkResponse(withErrorType: args))
+                                                 })
+        methods.append(methodAuthentication)
+
+        let methodTrackingError = MethodChannel(nil,
+                                                FinishMethodName.trackingErrorFinished.rawValue,
+                                                nil,
+                                                { args in
+                                                    delegate.getTrackingErrorResponse(args.toObject() ?? SdkResponse())
+                                                },
+                                                nil)
+        methods.append(methodTrackingError)
     }
 
     // MARK: - STATIC

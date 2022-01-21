@@ -23,7 +23,9 @@ public class FacephiSdkManager {
     // MARK: - PRIVATE FUNC
     private func invoke(method: String, args: String?, checkNetwork: Bool = true) {
         if let method = methodsFactory.getMethodChannel(byInvokeMethodName: method) {
-            method.invokeMethodHandler(method.invokeMethodName, args, checkNetwork)
+            if let invokeMethodName = method.invokeMethodName, let handler = method.invokeMethodHandler {
+                handler(invokeMethodName, args, checkNetwork)
+            }
         }
     }
 }
@@ -33,16 +35,24 @@ extension FacephiSdkManager: FacephiSdkRequestProtocol {
         invoke(method: MethodsFactory.InitMethodName.customerTracking.rawValue, args: customerId)
     }
 
-    public func tokenize(_ data: String) {
-        invoke(method: MethodsFactory.InitMethodName.tokenize.rawValue, args: data)
+    public func tokenize(_ tokenizeData: TokenizeData) {
+        invoke(method: MethodsFactory.InitMethodName.tokenize.rawValue, args: tokenizeData.json)
     }
 
     public func initSession(withRequest request: InitSessionRequest) {
         invoke(method: MethodsFactory.InitMethodName.initSession.rawValue, args: request.json)
     }
 
-    public func initProcess(withRequest request: InitProcessRequest) {
-        invoke(method: MethodsFactory.InitMethodName.initOnboardingProcess.rawValue, args: request.json)
+    public func initOperation(withRequest request: InitOperationRequest) {
+        invoke(method: MethodsFactory.InitMethodName.initOperation.rawValue, args: request.json)
+    }
+
+    public func launchOnboarding(withRequest request: OnboardingRequest) {
+        invoke(method: MethodsFactory.InitMethodName.onboarding.rawValue, args: request.json)
+    }
+
+    public func launchAuthentication(withRequest request: AuthenticationRequest) {
+        invoke(method: MethodsFactory.InitMethodName.authentication.rawValue, args: request.json)
     }
 
     public func launchSelphi(_ configuration: SelphiConfiguration) {
@@ -55,7 +65,9 @@ extension FacephiSdkManager: FacephiSdkRequestProtocol {
                 method.errorResponseMethodHandler?(ErrorType.TE_EXTRACTION_LICENSE_ERROR.rawValue)
             }
             else {
-                method.invokeMethodHandler(method.invokeMethodName, configuration.json, true)
+                if let invokeMethodName = method.invokeMethodName, let handler = method.invokeMethodHandler {
+                    handler(invokeMethodName, configuration.json, true)
+                }
             }
         }
     }

@@ -10,8 +10,6 @@ import Foundation
 public struct SdkResponse: Codable {
     public var finishStatus = FinishStatus.STATUS_ERROR.rawValue
     public var errorType = ErrorType.TE_UNKNOWN_ERROR.rawValue
-    public var trackingStatus:Int? = FinishStatus.STATUS_OK.rawValue
-    public var trackingErrorType:[Int]? = [Int]()
     public var selphiResponse: SelphiResponse? = nil
     public var selphIdResponse: SelphIdResponse? = nil
 
@@ -21,6 +19,11 @@ public struct SdkResponse: Codable {
 
     public init(withFinishStatus: Int) {
         self.finishStatus = withFinishStatus
+    }
+
+    public init(withFinishStatus: Int, andErrorType: Int) {
+        self.finishStatus = withFinishStatus
+        self.errorType = andErrorType
     }
 
     public init() {}

@@ -7,6 +7,7 @@ interface FacephiSdkContract {
     fun getSelphIdResponse(sdkResponse: SdkResponse) { /* default implementation */ }
     fun getTrackingResponse(sdkResponse: SdkResponse) { /* default implementation */ }
     fun getInitSessionResponse(sdkResponse: SdkResponse)
+    fun getTrackingError(sdkResponse: SdkResponse)
     fun getInitOperationResponse(sdkResponse: SdkResponse) { /* default implementation */ }
     fun generateRawTemplateResponse(generateRawTemplateResponse: String?) { /* default implementation */ }
     fun getTokenizedString(tokenizedString: String?) { /* default implementation */ }

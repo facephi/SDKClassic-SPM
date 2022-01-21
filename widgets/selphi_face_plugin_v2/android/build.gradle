@@ -20,8 +20,8 @@ rootProject.allprojects {
         maven {
             url = 'https://maven.pkg.github.com/facephi/central-packages'
             credentials {
-                username = "abueno@facephi.com"
-                password = "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"
+                username = "downloadpackagesgit"
+                password = "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"
             }
         }
     }

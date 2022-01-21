@@ -4,11 +4,12 @@ import FlutterPluginRegistrant
 class FlutterChannel {
     // MARK: - PROPS
     internal let channelName = "onboarding.facephi.com/channel"
+    internal let engineName = "onboarding.facephi.com/engine"
     internal var networkStatusProvider: NetworkStatusProviderProtocol!
     internal var delegate: ChannelResponseProtocol!
 
     private lazy var engine: FlutterEngine = {
-        let result = FlutterEngine(name: "my flutter engine")
+        let result = FlutterEngine(name: engineName)
         // This could be `run` earlier in the app to avoid the overhead of doing it the first time the
         // engine is needed.
         // result.run()
