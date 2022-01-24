@@ -1,15 +1,16 @@
-import Flutter
 import Foundation
+import Flutter
 import FPhiSelphIDWidgetiOS
 
-public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
+public class SwiftSelphIdPlugin: NSObject, FlutterPlugin
+{
     var enableWidgetEventListener: Bool = false
     var selphIDWidget: FPhiSelphIDWidget?
     var callPlugin: FlutterMethodCall?
     var resultPlugin: FlutterResult?
     var testImage: UIImage?
     var format: String = "jpeg"
-    var quality = CGFloat(1)
+    var quality: CGFloat = CGFloat(1)
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "selphid_plugin", binaryMessenger: registrar.messenger())
@@ -18,19 +19,19 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        self.resultPlugin = result
-        if call.method.elementsEqual("startSelphIDWidget") {
+        resultPlugin = result;
+        if (call.method.elementsEqual("startSelphIDWidget")) {
             self.startSelphIDWgt(call, result: result)
         }
-        else if call.method.elementsEqual("tokenize") {
+        else if (call.method.elementsEqual("tokenize")) {
             self.tokenize(call, result: result)
         }
-        else if call.method.elementsEqual("startSelphIDTestImageWidget") {
-            let args = call.arguments as? NSDictionary
-            let testType = args?.value(forKey: "testType") as? String
-            let image = args?.value(forKey: "testImageName") as? String
+        else if (call.method.elementsEqual("startSelphIDTestImageWidget")) {
+            let args        = call.arguments as? NSDictionary
+            let testType    = args?.value(forKey: "testType") as? String
+            let image       = args?.value(forKey: "testImageName") as? String
             
-            self.testImage = (testType! == "Base64") ? self.readImage64(image!) : self.readImage(image!)
+            self.testImage = (testType! == "Base64") ? readImage64(image!) : readImage(image!)
             self.startSelphIDWgt(call, result: result)
         }
     }
@@ -51,7 +52,7 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
     }
     
     func readImage(_ testImageName: String) -> UIImage {
-        var content: UIImage?
+        var content: UIImage? = nil
 
         let path = Bundle.main.path(forResource: testImageName, ofType: nil)
         if let path = path {
@@ -61,29 +62,30 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
     }
     
     func readImage64(_ testImageName: String) -> UIImage {
-        let imageToEncode = testImageName.replacingOccurrences(of: "data:image/jpeg;base64,", with: "", options: .literal, range: nil).replacingOccurrences(of: "data:image/png;base64,", with: "", options: .literal, range: nil)
-        let dataEncoded = Data(base64Encoded: imageToEncode, options: [])
-        var image: UIImage?
+        let imageToEncode   = testImageName.replacingOccurrences(of: "data:image/jpeg;base64,", with: "", options: .literal, range: nil).replacingOccurrences(of: "data:image/png;base64,", with: "", options: .literal, range: nil)
+        let dataEncoded     = Data(base64Encoded: imageToEncode, options: [])
+        var image: UIImage? = nil
         if let dataEncoded = dataEncoded {
             image = UIImage(data: dataEncoded)
         }
         return image!
     }
     
-    func startSelphIDWgt(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+    func startSelphIDWgt(_ call: FlutterMethodCall, result: @escaping FlutterResult)
+    {
         let args = call.arguments as? NSDictionary
         let config = args?.value(forKey: "widgetConfigurationJSON") as? NSObject
         
         guard let resourcesPath = args?.value(forKey: "resourcesPath") as? String else {
-            result(FlutterError(code: "GENERIC ERROR",
-                                message: "Must provide a valid 'Resources Path'",
-                                details: nil))
+            result(FlutterError.init(code: "GENERIC ERROR",
+                                     message: "Must provide a valid 'Resources Path'",
+                                     details: nil))
             return
         }
         guard let license = args?.value(forKey: "widgetLicense") as? String else {
-            result(FlutterError(code: "GENERIC ERROR",
-                                message: "Must provide a 'License'",
-                                details: nil))
+            result(FlutterError.init(code: "GENERIC ERROR",
+                                     message: "Must provide a 'License'",
+                                     details: nil))
             return
         }
 
@@ -91,12 +93,11 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
         
         do {
             try self.selphIDWidget = FPhiSelphIDWidget(
-                backCameraIfAvailable: true,
-                resources: strBundle,
-                delegate: self,
-                license: license)
-        }
-        catch {
+                    backCameraIfAvailable: true,
+                    resources: strBundle,
+                    delegate: self,
+                    license: license)
+        } catch {
             self.rejectPromise(errorMessage: "Error: Problem creating the widget instance")
             return
         }
@@ -117,19 +118,23 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
             currentSelphIDWidget.tokenImageQuality = Float(tokenImageQuality) ?? currentSelphIDWidget.tokenImageQuality
         }
 
+        
         if let operationMode = args?.value(forKey: "operationMode") as? String {
             switch operationMode {
             case SelphidEnums.SelphIDOperation.Front.rawValue:
                 currentSelphIDWidget.scanSide = FPhiSelphIDWidgetDocumentSide.DSFront
                 currentSelphIDWidget.wizardMode = false
+                break
             case SelphidEnums.SelphIDOperation.Back.rawValue:
                 currentSelphIDWidget.scanSide = FPhiSelphIDWidgetDocumentSide.DSBack
                 currentSelphIDWidget.wizardMode = false
+                break
             case SelphidEnums.SelphIDOperation.Wizard.rawValue:
                 currentSelphIDWidget.scanSide = FPhiSelphIDWidgetDocumentSide.DSFront
                 currentSelphIDWidget.wizardMode = true
             default:
                 rejectPromise(errorMessage: "Error: Parameter 'operation' is not valid.")
+                break
             }
         }
         
@@ -137,19 +142,22 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
             switch format {
             case "jpeg":
                 self.format = format
+                break
             case "png":
                 self.format = format
+                break
             default:
                 self.format = "jpeg"
+                break
             }
         }
         
         if let quality = config?.value(forKey: "imageQuality") as? Int {
             self.quality = CGFloat(Int(quality)) / 100.0
-            if quality > 0, quality < 90 {
+            if quality > 0 && quality < 90 {
                 print("Warning: imageQuality selection not recommended")
             }
-            if quality < 0 || quality > 100 {
+            if (quality < 0 || quality > 100) {
                 self.quality = CGFloat(1)
             }
         }
@@ -161,12 +169,15 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
             switch scanMode {
             case SelphidEnums.SelphIDScanMode.Generic.rawValue:
                 currentSelphIDWidget.scanMode = FPhiSelphIDWidgetScanMode.SMGeneric
+                break
             case SelphidEnums.SelphIDScanMode.Specific.rawValue:
                 currentSelphIDWidget.scanMode = FPhiSelphIDWidgetScanMode.SMSpecific
+                break
             case SelphidEnums.SelphIDScanMode.Search.rawValue:
                 currentSelphIDWidget.scanMode = FPhiSelphIDWidgetScanMode.SMSearch
             default:
                 rejectPromise(errorMessage: "Error: Parameter 'scanMode' is not valid.")
+                break
             }
         }
 
@@ -174,18 +185,25 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
             switch documentType {
             case SelphidEnums.SelphIDDocumentType.IDCard.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTIDCard
+                break
             case SelphidEnums.SelphIDDocumentType.Passport.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTPassport
+                break
             case SelphidEnums.SelphIDDocumentType.DriverLicense.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTDriversLicense
+                break
             case SelphidEnums.SelphIDDocumentType.ForeignCard.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTForeignCard
+                break
             case SelphidEnums.SelphIDDocumentType.CreditCard.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTCreditCard
+                break
             case SelphidEnums.SelphIDDocumentType.Custom.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTCustom
+                break
             default:
                 rejectPromise(errorMessage: "Error: Parameter 'documentType' is not valid.")
+                break
             }
         }
         
@@ -193,31 +211,35 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
             switch timeout {
             case SelphidEnums.SelphIDTimeout.Short.rawValue:
                 currentSelphIDWidget.timeout = FPhiSelphIDWidgetTimeout.TShort
+                break
             case SelphidEnums.SelphIDTimeout.Medium.rawValue:
                 currentSelphIDWidget.timeout = FPhiSelphIDWidgetTimeout.TMedium
+                break
             case SelphidEnums.SelphIDTimeout.Long.rawValue:
                 currentSelphIDWidget.timeout = FPhiSelphIDWidgetTimeout.TLong
+                break
             default:
                 rejectPromise(errorMessage: "Error: Parameter 'timeout' is not valid.")
+                break
             }
         }
         
-        if self.testImage != nil {
-            currentSelphIDWidget.testImage = self.testImage
+        if (self.testImage != nil) {
+            currentSelphIDWidget.testImage = self.testImage;
         }
         
         if let translationsContent = config?.value(forKey: "translationsContent") as? String {
-            currentSelphIDWidget.translationsContent = translationsContent
+            currentSelphIDWidget.translationsContent = translationsContent;
         }
         
         if let viewsContent = config?.value(forKey: "viewsContent") as? String {
-            currentSelphIDWidget.viewsContent = viewsContent
+            currentSelphIDWidget.viewsContent = viewsContent;
         }
         
         if let params = config?.value(forKey: "params") as? NSDictionary {
             let param = params.allKeys
             for key in param {
-                currentSelphIDWidget.setParam(key as! String, withValue: params[key] as? String)
+                currentSelphIDWidget.setParam((key as! String), withValue: params[key] as? String)
             }
         }
         
@@ -225,7 +247,8 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
         if let viewController = (UIApplication.shared.keyWindow?.rootViewController) {
             viewController.present(currentSelphIDWidget, animated: true, completion: nil)
         }
-        else {
+        else
+        {
             self.rejectPromise(errorMessage: "Error: viewController Exception.")
             return
         }
@@ -233,16 +256,17 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin {
 }
 
 // MARK: - Widget delegate methods
-extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
+extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol
+{
     func rejectPromise(errorMessage: String) {
         print("Returning reject result")
-        self.resultPlugin!(FlutterError(code: "GENERIC ERROR",
-                                        message: errorMessage,
-                                        details: nil))
-    }
+        self.resultPlugin!(FlutterError.init(code: "GENERIC ERROR",
+                                 message: errorMessage,
+                                 details: nil))
+     }
     
     func parseJson(_ results: FPhiSelphIDWidgetExtractionData, _ jsonString: inout String?) {
-        var dictData: Data?
+        var dictData: Data? = nil
         do {
             dictData = try JSONSerialization.data(
                 withJSONObject: results.ocrResults as Any,
@@ -260,12 +284,12 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
     }
     
     public func captureFinished() {
-        // os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction finished")
-        // Get extractor result
-        guard let results = self.selphIDWidget!.results else {
-            self.rejectPromise(errorMessage: "Extraction failed: Results are not valid")
+         //os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction finished")
+         // Get extractor result
+         guard let results = self.selphIDWidget!.results else {
+            rejectPromise(errorMessage: "Extraction failed: Results are not valid")
             return
-        }
+         }
         
         let tokenFrontDocument = results.tokenFrontDocument ?? ""
         let tokenBackDocument = results.tokenBackDocument ?? ""
@@ -279,44 +303,44 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
         
         var frontDocumentImage = ""
         if results.frontDocument != nil {
-            frontDocumentImage = self.proccessImage(format: self.format, stream: results.frontDocument)
+            frontDocumentImage = proccessImage(format: self.format, stream: results.frontDocument)
         }
         
         var faceImage = ""
         if results.faceImage != nil {
-            faceImage = self.proccessImage(format: self.format, stream: results.faceImage)
+            faceImage = proccessImage(format: self.format, stream: results.faceImage)
         }
         
         var signatureImage = ""
         if results.signatureImage != nil {
-            signatureImage = self.proccessImage(format: self.format, stream: results.signatureImage)
+            signatureImage = proccessImage(format: self.format, stream: results.signatureImage)
         }
         
         var backDocumentImage = ""
         if results.backDocument != nil {
-            backDocumentImage = self.proccessImage(format: self.format, stream: results.backDocument)
+            backDocumentImage = proccessImage(format: self.format, stream: results.backDocument)
         }
         
         var fingerprintImage = ""
         if results.fingerprintImage != nil {
-            // fingerprintImage = results.fingerprintImage.jpegData(compressionQuality: self.quality)?.base64EncodedString() ?? ""
-            fingerprintImage = self.proccessImage(format: self.format, stream: results.fingerprintImage)
+            //fingerprintImage = results.fingerprintImage.jpegData(compressionQuality: self.quality)?.base64EncodedString() ?? ""
+            fingerprintImage = proccessImage(format: self.format, stream: results.fingerprintImage)
         }
         
         var rawFrontDocumentImage = ""
         if results.rawFrontDocument != nil {
-            rawFrontDocumentImage = self.proccessImage(format: self.format, stream: results.rawFrontDocument)
+            rawFrontDocumentImage = proccessImage(format: self.format, stream: results.rawFrontDocument)
         }
         
         var rawBackDocumentImage = ""
         if results.rawBackDocument != nil {
-            rawBackDocumentImage = self.proccessImage(format: self.format, stream: results.rawBackDocument)
+            rawBackDocumentImage = proccessImage(format: self.format, stream: results.rawBackDocument)
         }
         
-        var jsonString: String?
-        self.parseJson(results, &jsonString)
+        var jsonString: String? = nil
+        parseJson(results, &jsonString)
         
-        var result: [String: Any] = [
+        var result: [String : Any] = [
             "finishStatus": 1,
             "finishStatusDescription": "Extraction completed",
             "errorType": 2,
@@ -363,7 +387,7 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
 
     public func proccessImage(format: String, stream: UIImage) -> String {
         var proccessedImage = ""
-        if format == "jpeg" {
+        if (format == "jpeg") {
             proccessedImage = stream.jpegData(compressionQuality: self.quality)?.base64EncodedString() ?? ""
         }
         else {
@@ -374,12 +398,12 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
     }
     
     public func captureFailed(_ error: Error!) {
-        // os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction failed: \(error.debugDescription)")
-        self.rejectPromise(errorMessage: error.debugDescription)
+        //os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction failed: \(error.debugDescription)")
+        rejectPromise(errorMessage: error.debugDescription)
     }
 
     public func captureCancelled() {
-        // os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction cancelled")
+        //os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction cancelled")
         self.resultPlugin!([
             "finishStatus": 3,
             "finishStatusDescription": "Cancelled by user",
@@ -388,7 +412,7 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
     }
 
     public func captureTimeout() {
-        // os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction timeout")
+        //os_log("[Extractor] - %s", log: .default, type: .debug, "Extraction timeout")
         self.resultPlugin!([
             "finishStatus": 4,
             "finishStatusDescription": "Timeout",
@@ -397,28 +421,36 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
     }
 
     public func onEvent(_ time: Date?, type: String?, info: String?) {
-        if self.enableWidgetEventListener {
-            // print(String(format: "onSelphiLogEvent: (%lums) %@ - %@", UInt(time!.timeIntervalSince1970 * 1000), type!, info!))
+        if (self.enableWidgetEventListener) {
+            //print(String(format: "onSelphiLogEvent: (%lums) %@ - %@", UInt(time!.timeIntervalSince1970 * 1000), type!, info!))
             let formatter = DateFormatter()
             formatter.dateStyle = .short
             let timeDouble = NSNumber(value: time!.timeIntervalSince1970)
-            // let stringEvent: String = String(format: "{\"selphidLogInfo\":{\"time\":\"%@\", \"type\":\"%@\", \"info\":\"%@\"}}", timeDouble.stringValue, type!, info!)
+            //let stringEvent: String = String(format: "{\"selphidLogInfo\":{\"time\":\"%@\", \"type\":\"%@\", \"info\":\"%@\"}}", timeDouble.stringValue, type!, info!)
             
-            let events: [String: Any] = [
+            let events: [String : Any] = [
                 "time": timeDouble.stringValue,
                 "type": type!,
-                "info": info!
+                "info": info!,
             ]
             
             do {
-                let jsonData = try JSONSerialization.data(withJSONObject: events)
-                if let json = String(data: jsonData, encoding: .utf8) {
+                let jsonData    = try JSONSerialization.data(withJSONObject: events)
+                if let json     = String(data: jsonData, encoding: .utf8) {
                     DispatchQueue.main.async {
+                        /*let eventViewCtrl: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
+                        let channel = FlutterBasicMessageChannel(
+                            name: "onSelphidLogEvent",
+                            binaryMessenger: eventViewCtrl as! FlutterBinaryMessenger,
+                            codec: FlutterStringCodec.sharedInstance())
+
+                        channel.sendMessage(json)*/
+                        
                         if let eventViewCtrl: FlutterViewController = self.getFlutterViewController() {
                             let channel = FlutterBasicMessageChannel(
-                                name: "onSelphidLogEvent",
-                                binaryMessenger: eventViewCtrl.binaryMessenger,
-                                codec: FlutterStringCodec.sharedInstance())
+                            name: "onSelphidLogEvent",
+                            binaryMessenger: eventViewCtrl.binaryMessenger,
+                            codec: FlutterStringCodec.sharedInstance())
 
                             channel.sendMessage(json)
                         }
@@ -430,7 +462,7 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol {
             }
         }
     }
-
+    
     public func getFlutterViewController() -> FlutterViewController? {
         let root = (UIApplication.shared.keyWindow?.rootViewController)!
         let eventViewCtrl = root.presentedViewController ?? root

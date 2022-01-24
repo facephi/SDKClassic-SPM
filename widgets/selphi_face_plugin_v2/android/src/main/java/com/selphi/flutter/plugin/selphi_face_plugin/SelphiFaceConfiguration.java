@@ -247,8 +247,15 @@ public class SelphiFaceConfiguration {
                 SelphiFaceLogModel.getLogModel().getCurrentLog().observe(mFlutterActivity, new Observer<String>() {
                     @Override
                     public void onChanged(String logData) {
+                        JSONObject params = new JSONObject();
+                        try {
+                            params.put(SELPHI_LOG_PARAM_NAME, logData);
+                        } catch (JSONException e) {
+                            Log.d("Event Exception:", e.getMessage());
+                        }
+
                         BasicMessageChannel channel = new BasicMessageChannel(messenger, SELPHI_LOG_EVENT_NAME, StringCodec.INSTANCE);
-                        channel.send(logData);
+                        channel.send(params.toString());
                     }
                 });
             }

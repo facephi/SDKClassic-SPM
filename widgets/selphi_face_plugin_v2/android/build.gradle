@@ -43,8 +43,8 @@ android {
 }
 
 dependencies {
-    implementation('com.facephi:fphi-core-widget:5.7.2')
-    implementation('com.facephi:fphi-selphi-widget:5.7.2')
+    implementation('com.facephi:fphi-core-widget:5.7.3')
+    implementation('com.facephi:fphi-selphi-widget:5.7.3')
     implementation 'com.google.code.gson:gson:2.8.9'
     //implementation fileTree(include: ['*.aar'], dir: 'src/main/libs')
 }

@@ -1,0 +1,325 @@
+BCSymbolMap Version: 2.0
+Apple clang version 13.0.0 (clang-1300.0.29.30)
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk
+iPhoneOS15.2.sdk
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/build-ios/Release/iphoneos/Pods.build/Release-iphoneos/GoogleToolboxForMac.build/DerivedSources/GoogleToolboxForMac_vers.c
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/.ios/Pods
+__OBJC_METACLASS_RO_$_PodsDummy_GoogleToolboxForMac
+__OBJC_CLASS_RO_$_PodsDummy_GoogleToolboxForMac
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/.ios/Pods/Target Support Files/GoogleToolboxForMac/GoogleToolboxForMac-dummy.m
++[GTMLogger sharedLogger]
++[GTMLogger setSharedLogger:]
++[GTMLogger standardLogger]
++[GTMLogger standardLoggerWithStderr]
++[GTMLogger standardLoggerWithStdoutAndStderr]
++[GTMLogger standardLoggerWithPath:]
++[GTMLogger loggerWithWriter:formatter:filter:]
++[GTMLogger logger]
+-[GTMLogger init]
+-[GTMLogger initWithWriter:formatter:filter:]
+-[GTMLogger dealloc]
+-[GTMLogger writer]
+-[GTMLogger setWriter:]
+-[GTMLogger formatter]
+-[GTMLogger setFormatter:]
+-[GTMLogger filter]
+-[GTMLogger setFilter:]
+-[GTMLogger notifyFilterBeforeDetachIfNeeded]
+-[GTMLogger notifyFilterAfterAttachIfNeeded]
+-[GTMLogger logDebug:]
+-[GTMLogger logInfo:]
+-[GTMLogger logError:]
+-[GTMLogger logAssert:]
+-[GTMLogger(GTMLoggerMacroHelpers) logFuncDebug:msg:]
+-[GTMLogger(GTMLoggerMacroHelpers) logFuncInfo:msg:]
+-[GTMLogger(GTMLoggerMacroHelpers) logFuncError:msg:]
+-[GTMLogger(GTMLoggerMacroHelpers) logFuncAssert:msg:]
+-[GTMLogger(PrivateMethods) logInternalFunc:format:valist:level:]
++[NSFileHandle(GTMFileHandleLogWriter) fileHandleForLoggingAtPath:mode:]
+-[NSFileHandle(GTMFileHandleLogWriter) logMessage:level:]
+-[NSArray(GTMArrayCompositeLogWriter) logMessage:level:]
+-[GTMLogger(GTMLoggerLogWriter) logMessage:level:]
+-[GTMLogBasicFormatter prettyNameForFunc:]
+-[GTMLogBasicFormatter stringForFunc:withFormat:valist:level:]
+-[GTMLogStandardFormatter init]
+-[GTMLogStandardFormatter dealloc]
+-[GTMLogStandardFormatter stringForFunc:withFormat:valist:level:]
+-[GTMLogLevelFilter init]
+_IsVerboseLoggingEnabled
+-[GTMLogLevelFilter dealloc]
+-[GTMLogLevelFilter filterAllowsMessage:level:]
+-[GTMLogLevelFilter didAttachToLogger]
+-[GTMLogLevelFilter willDetachFromLogger]
+-[GTMLogLevelFilter startObservingUserDefaultsIfNeeded]
+-[GTMLogLevelFilter stopObservingUserDefaultsIfNeeded]
+-[GTMLogLevelFilter observeValueForKeyPath:ofObject:change:context:]
+-[GTMLogLevelFilter verboseLoggingEnabled]
+-[GTMLogLevelFilter setVerboseLoggingEnabled:]
+-[GTMLogNoFilter filterAllowsMessage:level:]
+-[GTMLogAllowedLevelFilter initWithAllowedLevels:]
+-[GTMLogAllowedLevelFilter init]
+-[GTMLogAllowedLevelFilter dealloc]
+-[GTMLogAllowedLevelFilter filterAllowsMessage:level:]
+-[GTMLogMininumLevelFilter initWithMinimumLevel:]
+-[GTMLogMaximumLevelFilter initWithMaximumLevel:]
+_gSharedLogger
+_OBJC_SELECTOR_REFERENCES_
+_OBJC_CLASSLIST_REFERENCES_$_
+_OBJC_SELECTOR_REFERENCES_.2
+_OBJC_CLASSLIST_REFERENCES_$_.3
+_OBJC_SELECTOR_REFERENCES_.5
+_OBJC_CLASSLIST_REFERENCES_$_.6
+_OBJC_SELECTOR_REFERENCES_.8
+_OBJC_SELECTOR_REFERENCES_.10
+_OBJC_SELECTOR_REFERENCES_.12
+_OBJC_CLASSLIST_REFERENCES_$_.13
+_OBJC_CLASSLIST_REFERENCES_$_.14
+_OBJC_SELECTOR_REFERENCES_.16
+_OBJC_SELECTOR_REFERENCES_.18
+_OBJC_CLASSLIST_REFERENCES_$_.19
+_OBJC_SELECTOR_REFERENCES_.21
+_OBJC_CLASSLIST_REFERENCES_$_.22
+_OBJC_SELECTOR_REFERENCES_.24
+_OBJC_CLASSLIST_REFERENCES_$_.25
+_OBJC_SELECTOR_REFERENCES_.27
+_OBJC_SELECTOR_REFERENCES_.29
+_OBJC_SELECTOR_REFERENCES_.31
+_OBJC_SELECTOR_REFERENCES_.33
+_OBJC_SELECTOR_REFERENCES_.35
+_OBJC_SELECTOR_REFERENCES_.37
+_OBJC_SELECTOR_REFERENCES_.39
+_OBJC_SELECTOR_REFERENCES_.41
+_OBJC_SELECTOR_REFERENCES_.43
+_OBJC_SELECTOR_REFERENCES_.45
+__OBJC_$_CLASS_METHODS_GTMLogger
+__OBJC_METACLASS_RO_$_GTMLogger
+__OBJC_$_INSTANCE_METHODS_GTMLogger
+_OBJC_IVAR_$_GTMLogger.writer_
+_OBJC_IVAR_$_GTMLogger.formatter_
+_OBJC_IVAR_$_GTMLogger.filter_
+__OBJC_$_INSTANCE_VARIABLES_GTMLogger
+__OBJC_CLASS_RO_$_GTMLogger
+__OBJC_$_CATEGORY_INSTANCE_METHODS_GTMLogger_$_GTMLoggerMacroHelpers
+__OBJC_$_CATEGORY_GTMLogger_$_GTMLoggerMacroHelpers
+_OBJC_CLASSLIST_REFERENCES_$_.75
+_OBJC_SELECTOR_REFERENCES_.77
+_OBJC_SELECTOR_REFERENCES_.79
+_OBJC_SELECTOR_REFERENCES_.81
+_OBJC_SELECTOR_REFERENCES_.83
+__OBJC_$_CATEGORY_INSTANCE_METHODS_GTMLogger_$_PrivateMethods
+__OBJC_$_CATEGORY_GTMLogger_$_PrivateMethods
+_OBJC_SELECTOR_REFERENCES_.87
+_OBJC_SELECTOR_REFERENCES_.89
+_OBJC_SELECTOR_REFERENCES_.91
+_OBJC_SELECTOR_REFERENCES_.93
+_OBJC_SELECTOR_REFERENCES_.95
+__OBJC_$_CATEGORY_INSTANCE_METHODS_NSFileHandle_$_GTMFileHandleLogWriter
+__OBJC_$_CATEGORY_CLASS_METHODS_NSFileHandle_$_GTMFileHandleLogWriter
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_NSObject
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_NSObject
+__OBJC_$_PROP_LIST_NSObject
+__OBJC_$_PROTOCOL_METHOD_TYPES_NSObject
+__OBJC_PROTOCOL_$_NSObject
+__OBJC_LABEL_PROTOCOL_$_NSObject
+__OBJC_$_PROTOCOL_REFS_GTMLogWriter
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_GTMLogWriter
+__OBJC_$_PROTOCOL_METHOD_TYPES_GTMLogWriter
+__OBJC_PROTOCOL_$_GTMLogWriter
+__OBJC_LABEL_PROTOCOL_$_GTMLogWriter
+__OBJC_CATEGORY_PROTOCOLS_$_NSFileHandle_$_GTMFileHandleLogWriter
+__OBJC_$_PROP_LIST_NSFileHandle_$_GTMFileHandleLogWriter
+__OBJC_$_CATEGORY_NSFileHandle_$_GTMFileHandleLogWriter
+_OBJC_SELECTOR_REFERENCES_.141
+__OBJC_PROTOCOL_REFERENCE_$_GTMLogWriter
+_OBJC_SELECTOR_REFERENCES_.142
+__OBJC_$_CATEGORY_INSTANCE_METHODS_NSArray_$_GTMArrayCompositeLogWriter
+__OBJC_CATEGORY_PROTOCOLS_$_NSArray_$_GTMArrayCompositeLogWriter
+__OBJC_$_PROP_LIST_NSArray_$_GTMArrayCompositeLogWriter
+__OBJC_$_CATEGORY_NSArray_$_GTMArrayCompositeLogWriter
+_OBJC_SELECTOR_REFERENCES_.146
+_OBJC_SELECTOR_REFERENCES_.147
+_OBJC_SELECTOR_REFERENCES_.148
+_OBJC_SELECTOR_REFERENCES_.149
+__OBJC_$_CATEGORY_INSTANCE_METHODS_GTMLogger_$_GTMLoggerLogWriter
+__OBJC_CATEGORY_PROTOCOLS_$_GTMLogger_$_GTMLoggerLogWriter
+__OBJC_$_PROP_LIST_GTMLogger_$_GTMLoggerLogWriter
+__OBJC_$_CATEGORY_GTMLogger_$_GTMLoggerLogWriter
+_OBJC_CLASSLIST_REFERENCES_$_.151
+_OBJC_SELECTOR_REFERENCES_.153
+_OBJC_SELECTOR_REFERENCES_.155
+_OBJC_SELECTOR_REFERENCES_.159
+_OBJC_SELECTOR_REFERENCES_.163
+_OBJC_SELECTOR_REFERENCES_.169
+_OBJC_SELECTOR_REFERENCES_.173
+__OBJC_$_PROTOCOL_REFS_GTMLogFormatter
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_GTMLogFormatter
+__OBJC_$_PROTOCOL_METHOD_TYPES_GTMLogFormatter
+__OBJC_PROTOCOL_$_GTMLogFormatter
+__OBJC_LABEL_PROTOCOL_$_GTMLogFormatter
+__OBJC_CLASS_PROTOCOLS_$_GTMLogBasicFormatter
+__OBJC_METACLASS_RO_$_GTMLogBasicFormatter
+__OBJC_$_INSTANCE_METHODS_GTMLogBasicFormatter
+__OBJC_$_PROP_LIST_GTMLogBasicFormatter
+__OBJC_CLASS_RO_$_GTMLogBasicFormatter
+_OBJC_CLASSLIST_REFERENCES_$_.180
+_OBJC_IVAR_$_GTMLogStandardFormatter.dateFormatter_
+_OBJC_SELECTOR_REFERENCES_.182
+_OBJC_SELECTOR_REFERENCES_.186
+_OBJC_CLASSLIST_REFERENCES_$_.187
+_OBJC_SELECTOR_REFERENCES_.189
+_OBJC_SELECTOR_REFERENCES_.191
+_OBJC_SELECTOR_REFERENCES_.193
+_OBJC_IVAR_$_GTMLogStandardFormatter.pname_
+_OBJC_SELECTOR_REFERENCES_.195
+_OBJC_IVAR_$_GTMLogStandardFormatter.pid_
+_OBJC_CLASSLIST_REFERENCES_$_.196
+_OBJC_SELECTOR_REFERENCES_.198
+_OBJC_SELECTOR_REFERENCES_.200
+_OBJC_SELECTOR_REFERENCES_.203
+__OBJC_METACLASS_RO_$_GTMLogStandardFormatter
+__OBJC_$_INSTANCE_METHODS_GTMLogStandardFormatter
+__OBJC_$_INSTANCE_VARIABLES_GTMLogStandardFormatter
+__OBJC_CLASS_RO_$_GTMLogStandardFormatter
+_OBJC_SELECTOR_REFERENCES_.213
+_OBJC_SELECTOR_REFERENCES_.215
+_OBJC_SELECTOR_REFERENCES_.217
+_OBJC_SELECTOR_REFERENCES_.219
+_OBJC_CLASSLIST_REFERENCES_$_.220
+_OBJC_SELECTOR_REFERENCES_.222
+_OBJC_SELECTOR_REFERENCES_.226
+_OBJC_SELECTOR_REFERENCES_.228
+_OBJC_SELECTOR_REFERENCES_.229
+__OBJC_$_PROTOCOL_REFS_GTMLogFilter
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_GTMLogFilter
+__OBJC_$_PROTOCOL_INSTANCE_METHODS_OPT_GTMLogFilter
+__OBJC_$_PROTOCOL_METHOD_TYPES_GTMLogFilter
+__OBJC_PROTOCOL_$_GTMLogFilter
+__OBJC_LABEL_PROTOCOL_$_GTMLogFilter
+__OBJC_CLASS_PROTOCOLS_$_GTMLogLevelFilter
+__OBJC_METACLASS_RO_$_GTMLogLevelFilter
+__OBJC_$_INSTANCE_METHODS_GTMLogLevelFilter
+_OBJC_IVAR_$_GTMLogLevelFilter.userDefaults_
+_OBJC_IVAR_$_GTMLogLevelFilter._verboseLoggingEnabled
+__OBJC_$_INSTANCE_VARIABLES_GTMLogLevelFilter
+__OBJC_$_PROP_LIST_GTMLogLevelFilter
+__OBJC_CLASS_RO_$_GTMLogLevelFilter
+__OBJC_CLASS_PROTOCOLS_$_GTMLogNoFilter
+__OBJC_METACLASS_RO_$_GTMLogNoFilter
+__OBJC_$_INSTANCE_METHODS_GTMLogNoFilter
+__OBJC_$_PROP_LIST_GTMLogNoFilter
+__OBJC_CLASS_RO_$_GTMLogNoFilter
+_OBJC_SELECTOR_REFERENCES_.246
+_OBJC_SELECTOR_REFERENCES_.248
+_OBJC_CLASSLIST_REFERENCES_$_.249
+_OBJC_SELECTOR_REFERENCES_.251
+_OBJC_SELECTOR_REFERENCES_.253
+_OBJC_SELECTOR_REFERENCES_.255
+__OBJC_CLASS_PROTOCOLS_$_GTMLogAllowedLevelFilter
+__OBJC_METACLASS_RO_$_GTMLogAllowedLevelFilter
+__OBJC_$_INSTANCE_METHODS_GTMLogAllowedLevelFilter
+_OBJC_IVAR_$_GTMLogAllowedLevelFilter.allowedLevels_
+__OBJC_$_INSTANCE_VARIABLES_GTMLogAllowedLevelFilter
+__OBJC_$_PROP_LIST_GTMLogAllowedLevelFilter
+__OBJC_CLASS_RO_$_GTMLogAllowedLevelFilter
+__OBJC_METACLASS_RO_$_GTMLogMininumLevelFilter
+__OBJC_$_INSTANCE_METHODS_GTMLogMininumLevelFilter
+__OBJC_CLASS_RO_$_GTMLogMininumLevelFilter
+__OBJC_METACLASS_RO_$_GTMLogMaximumLevelFilter
+__OBJC_$_INSTANCE_METHODS_GTMLogMaximumLevelFilter
+__OBJC_CLASS_RO_$_GTMLogMaximumLevelFilter
+_OBJC_SELECTOR_REFERENCES_.265
+_OBJC_SELECTOR_REFERENCES_.267
+_OBJC_SELECTOR_REFERENCES_.269
+_OBJC_SELECTOR_REFERENCES_.275
+_OBJC_SELECTOR_REFERENCES_.277
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/.ios/Pods/GoogleToolboxForMac/Foundation/GTMLogger.m
+GoogleToolboxForMac/Foundation/GTMLogger.m
+NSMakeRange
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+IsVerboseLoggingEnabled
++[NSData(GTMZlibAdditionsPrivate) gtm_dataByCompressingBytes:length:compressionLevel:mode:error:]
++[NSData(GTMZlibAdditionsPrivate) gtm_dataByInflatingBytes:length:isRawData:error:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingBytes:length:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingBytes:length:error:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingData:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingData:error:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingBytes:length:compressionLevel:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingBytes:length:compressionLevel:error:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingData:compressionLevel:]
++[NSData(GTMZLibAdditions) gtm_dataByGzippingData:compressionLevel:error:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingBytes:length:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingBytes:length:error:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingData:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingData:error:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingBytes:length:compressionLevel:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingBytes:length:compressionLevel:error:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingData:compressionLevel:]
++[NSData(GTMZLibAdditions) gtm_dataByDeflatingData:compressionLevel:error:]
++[NSData(GTMZLibAdditions) gtm_dataByInflatingBytes:length:]
++[NSData(GTMZLibAdditions) gtm_dataByInflatingBytes:length:error:]
++[NSData(GTMZLibAdditions) gtm_dataByInflatingData:]
++[NSData(GTMZLibAdditions) gtm_dataByInflatingData:error:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingBytes:length:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingBytes:length:error:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingData:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingData:error:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingBytes:length:compressionLevel:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingBytes:length:compressionLevel:error:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingData:compressionLevel:]
++[NSData(GTMZLibAdditions) gtm_dataByRawDeflatingData:compressionLevel:error:]
++[NSData(GTMZLibAdditions) gtm_dataByRawInflatingBytes:length:]
++[NSData(GTMZLibAdditions) gtm_dataByRawInflatingBytes:length:error:]
++[NSData(GTMZLibAdditions) gtm_dataByRawInflatingData:]
++[NSData(GTMZLibAdditions) gtm_dataByRawInflatingData:error:]
+_OBJC_CLASSLIST_REFERENCES_$_.7
+_OBJC_SELECTOR_REFERENCES_.9
+_OBJC_SELECTOR_REFERENCES_.11
+_OBJC_CLASSLIST_REFERENCES_$_.12
+_OBJC_SELECTOR_REFERENCES_.14
+_OBJC_CLASSLIST_REFERENCES_$_.17
+_OBJC_CLASSLIST_REFERENCES_$_.18
+_OBJC_SELECTOR_REFERENCES_.20
+_OBJC_SELECTOR_REFERENCES_.22
+__OBJC_$_CATEGORY_CLASS_METHODS_NSData_$_GTMZlibAdditionsPrivate
+__OBJC_$_CATEGORY_NSData_$_GTMZlibAdditionsPrivate
+_OBJC_SELECTOR_REFERENCES_.30
+_OBJC_SELECTOR_REFERENCES_.32
+_OBJC_SELECTOR_REFERENCES_.34
+_OBJC_SELECTOR_REFERENCES_.36
+_OBJC_SELECTOR_REFERENCES_.38
+_OBJC_SELECTOR_REFERENCES_.40
+_OBJC_SELECTOR_REFERENCES_.42
+_OBJC_SELECTOR_REFERENCES_.44
+_OBJC_SELECTOR_REFERENCES_.46
+_OBJC_SELECTOR_REFERENCES_.48
+_OBJC_SELECTOR_REFERENCES_.50
+_OBJC_SELECTOR_REFERENCES_.51
+_OBJC_SELECTOR_REFERENCES_.53
+_OBJC_SELECTOR_REFERENCES_.55
+_OBJC_SELECTOR_REFERENCES_.57
+_OBJC_SELECTOR_REFERENCES_.59
+_OBJC_SELECTOR_REFERENCES_.61
+_OBJC_SELECTOR_REFERENCES_.63
+__OBJC_$_CATEGORY_CLASS_METHODS_NSData_$_GTMZLibAdditions
+__OBJC_$_CATEGORY_NSData_$_GTMZLibAdditions
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/.ios/Pods/GoogleToolboxForMac/Foundation/GTMNSData+zlib.m
+GoogleToolboxForMac/Foundation/GTMNSData+zlib.m
+llvm.loop.mustprogress
++[NSDictionary(GTMNSDictionaryURLArgumentsAdditions) gtm_dictionaryWithHttpArgumentsString:]
+-[NSDictionary(GTMNSDictionaryURLArgumentsAdditions) gtm_httpArgumentsString]
+_OBJC_SELECTOR_REFERENCES_.4
+_OBJC_SELECTOR_REFERENCES_.6
+_OBJC_CLASSLIST_REFERENCES_$_.23
+_OBJC_SELECTOR_REFERENCES_.25
+_OBJC_CLASSLIST_REFERENCES_$_.28
+__OBJC_$_CATEGORY_INSTANCE_METHODS_NSDictionary_$_GTMNSDictionaryURLArgumentsAdditions
+__OBJC_$_CATEGORY_CLASS_METHODS_NSDictionary_$_GTMNSDictionaryURLArgumentsAdditions
+__OBJC_$_CATEGORY_NSDictionary_$_GTMNSDictionaryURLArgumentsAdditions
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/.ios/Pods/GoogleToolboxForMac/Foundation/GTMNSDictionary+URLArguments.m
+GoogleToolboxForMac/Foundation/GTMNSDictionary+URLArguments.m
+-[NSString(GTMNSStringURLArgumentsAdditions) gtm_stringByEscapingForURLArgument]
+-[NSString(GTMNSStringURLArgumentsAdditions) gtm_stringByUnescapingFromURLArgument]
+__OBJC_$_CATEGORY_INSTANCE_METHODS_NSString_$_GTMNSStringURLArgumentsAdditions
+__OBJC_$_CATEGORY_NSString_$_GTMNSStringURLArgumentsAdditions
+/Users/fflores/Documents/workspace/flutter/onboarding-sdk-legacy-flutter/flutter/.ios/Pods/GoogleToolboxForMac/Foundation/GTMNSString+URLArguments.m
+GoogleToolboxForMac/Foundation/GTMNSString+URLArguments.m

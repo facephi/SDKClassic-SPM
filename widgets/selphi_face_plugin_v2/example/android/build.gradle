@@ -1,25 +1,26 @@
 buildscript {
     repositories {
         google()
-        mavenCentral()
+        jcenter()
     }
 
     dependencies {
-        //classpath 'com.android.tools.build:gradle:4.1.0' //if error: The resulting AAR would be broken because the classes and Android resources from any local .aar file
-        classpath 'com.android.tools.build:gradle:3.6.4'
+        classpath 'com.android.tools.build:gradle:3.5.3'
     }
 }
 
 allprojects {
     repositories {
         google()
-        mavenCentral()
+        jcenter()
     }
 }
 
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
     project.evaluationDependsOn(':app')
 }
 

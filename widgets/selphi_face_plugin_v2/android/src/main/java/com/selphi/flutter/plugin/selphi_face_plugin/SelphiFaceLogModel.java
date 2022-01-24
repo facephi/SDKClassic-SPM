@@ -1,10 +1,6 @@
 package com.selphi.flutter.plugin.selphi_face_plugin;
 
 import androidx.lifecycle.MutableLiveData;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
-import java.util.HashMap;
 
 public class SelphiFaceLogModel {
     private static SelphiFaceLogModel mLogModelInstance;
@@ -20,14 +16,8 @@ public class SelphiFaceLogModel {
     }
 
     public void setCurrentLogJSON(String time, String type, String info) {
-
-        HashMap<String, String> logMap = new HashMap<>();
-        logMap.put("time", time);
-        logMap.put("type", type);
-        logMap.put("info", info);
-        Gson gson = new Gson();
-        Type typeOfHashMap = new TypeToken<HashMap<String, String>>() { }.getType();
-        currentLog.postValue(gson.toJson(logMap, typeOfHashMap)); // This type must match TypeToken
+        String logJSON = "{\"time\":\""+time+"\",\"type\":\""+type+"\", \"info\":\""+info+"\"}";
+        currentLog.postValue(logJSON);
     }
 
     public MutableLiveData<String> getCurrentLog() {

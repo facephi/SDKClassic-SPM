@@ -1,6 +1,5 @@
 import 'SelphiFaceLivenessMode.dart';
 
-
 class SelphiFaceConfiguration {
   bool mDebug;
   bool mFullscreen;
@@ -23,7 +22,9 @@ class SelphiFaceConfiguration {
   bool mQRMode;
   String mTranslationsContent;
   String mViewsContent;
-  
+  int mCameraId;
+  dynamic mParams;
+
   SelphiFaceConfiguration({
     this.mDebug = false,
     this.mFullscreen = true,
@@ -46,8 +47,26 @@ class SelphiFaceConfiguration {
     this.mQRMode = false,
     this.mTranslationsContent = "",
     this.mViewsContent = "",
+    this.mCameraId = 100,
+    this.mParams = "",
   });
-  
+
+  set params(dynamic params) {
+    mParams = params;
+  }
+
+  dynamic get params {
+    return mParams;
+  }
+
+  set cameraId(int camera) {
+    mCameraId = camera;
+  }
+
+  int get cameraId {
+    return mCameraId;
+  }
+
   set viewsContent(String viewsContent) {
     mViewsContent = viewsContent;
   }
@@ -56,11 +75,11 @@ class SelphiFaceConfiguration {
     return mViewsContent;
   }
   
-  set translationsContent(String translationContent) {
-    mTranslationsContent = translationContent;
+  set translationsContent(String translationsContent) {
+    mTranslationsContent = translationsContent;
   }
 
-  String get translationContent {
+  String get translationsContent {
     return mTranslationsContent;
   }
   
@@ -230,6 +249,10 @@ class SelphiFaceConfiguration {
       mEnableGenerateTemplateRaw: parsedJson['enableGenerateTemplateRaw'],
       mEnableWidgetEventListener: parsedJson['enableWidgetEventListener'],
       mQRMode: parsedJson['qrMode'],
+      mTranslationsContent: parsedJson['translationsContent'],
+      mViewsContent: parsedJson['viewsContent'],
+      mCameraId: parsedJson['cameraId'],
+      mParams: parsedJson['params'],
     );
   }
 
@@ -254,5 +277,9 @@ class SelphiFaceConfiguration {
         'enableGenerateTemplateRaw': mEnableGenerateTemplateRaw,
         'enableWidgetEventListener': mEnableWidgetEventListener,
         'qrMode': mQRMode,
+        'translationsContent': mTranslationsContent,
+        'viewsContent': mViewsContent,
+        'cameraId': mCameraId,
+        'params': mParams,
       };
 }

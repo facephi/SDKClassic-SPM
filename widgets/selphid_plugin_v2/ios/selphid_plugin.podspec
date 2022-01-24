@@ -15,15 +15,16 @@ A new flutter plugin project.
   s.source           = { :git => '.' }
   s.source_files = 'Classes/*.{h,m,swift}'
   s.public_header_files = 'Classes/*.h'
-
+  
   s.resources = ['Resources/fphi-selphid-widget-resources-selphid-1.0.zip']
 
+s.swift_version = '5.0'
 s.dependency 'zipzap'
 s.dependency 'Flutter'
+s.dependency 'GoogleMLKit/TextRecognition'
+s.dependency 'FPhiSelphIDWidgetiOS'  
 s.dependency 'FPhiMBWidgetiOS'
-s.dependency 'FPhiSelphIDWidgetiOSLight'
-s.swift_version     = '5.0'
-
 s.static_framework = true
 
 end
+

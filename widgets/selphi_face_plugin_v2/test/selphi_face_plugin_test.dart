@@ -5,11 +5,17 @@ import 'package:selphi_face_plugin/selphi_face_plugin.dart';
 void main() {
   const MethodChannel channel = MethodChannel('selphi_face_plugin');
 
-  TestWidgetsFlutterBinding.ensureInitialized();
-
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       return '42';
     });
+  });
+
+  tearDown(() {
+    channel.setMockMethodCallHandler(null);
+  });
+
+  test('getPlatformVersion', () async {
+    expect(await SelphiFacePlugin, '42');
   });
 }
