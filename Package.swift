@@ -27,7 +27,7 @@ let package = Package(
         .binaryTarget(name: "App", path: "flutter/App.xcframework"),
        .binaryTarget(name: "auth_plugin", path: "flutter/auth_plugin.xcframework"),
         .binaryTarget(name: "device_info_plus", path: "flutter/device_info_plus.xcframework"),
-        .binaryTarget(name: "Flutter",url:  "https://github.com/facephi/onboarding-sdk-legacy-flutter-packages/raw/master/Flutter.xcframework.zip",checksum: "4a946dfd90ffcf54d1400999828293eeab78c372858ee3e3416a6db4c1666170"),
+        .binaryTarget(name: "Flutter",url:  "https://dev-ctlzip-s3.s3.eu-west-1.amazonaws.com/Flutter.xcframework.zip",checksum: "4a946dfd90ffcf54d1400999828293eeab78c372858ee3e3416a6db4c1666170"),
        // .binaryTarget(name: "Flutter", path: "flutter/Flutter.xcframework"),
         .binaryTarget(name: "FlutterPluginRegistrant", path: "flutter/FlutterPluginRegistrant.xcframework"),
         .binaryTarget(name: "selphid_plugin", path: "flutter/selphid_plugin.xcframework"),
