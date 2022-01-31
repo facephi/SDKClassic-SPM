@@ -7,9 +7,9 @@ import 'package:tracking_plugin/tracking_service.dart';
 import 'package:uuid/uuid.dart';
 
 class TrackingPlugin {
-  TrackingPlugin(this.service);
+  TrackingPlugin();
 
-  TrackingService service;
+  late TrackingService service;
 
   String id = "";
   String type = "";
@@ -225,6 +225,19 @@ class TrackingPlugin {
 
     Response<String> response = await sendEvent(e);
     return response;
+  }
+  
+  Event getWidgetEvent(String screen, String event, String value){
+    return Event(
+      eventId: const Uuid().v4(),
+      payload: Payload(
+        type: type,
+        screen: screen,
+        event: event,
+        value: value,
+      ),
+      clientTimestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+    );
   }
 
   Future<Response<String>> sendEvent(TrackingEvent e) async {

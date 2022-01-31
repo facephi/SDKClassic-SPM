@@ -11,10 +11,13 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin
     var testImage: UIImage?
     var format: String = "jpeg"
     var quality: CGFloat = CGFloat(1)
+    var binaryMessenger: FlutterBinaryMessenger?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "selphid_plugin", binaryMessenger: registrar.messenger())
+        let binaryMessenger = registrar.messenger()
+        let channel = FlutterMethodChannel(name: "selphid_plugin", binaryMessenger: binaryMessenger)
         let instance = SwiftSelphIdPlugin()
+        instance.binaryMessenger = binaryMessenger
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
     
@@ -189,7 +192,7 @@ public class SwiftSelphIdPlugin: NSObject, FlutterPlugin
             case SelphidEnums.SelphIDDocumentType.Passport.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTPassport
                 break
-            case SelphidEnums.SelphIDDocumentType.DriverLicense.rawValue:
+            case SelphidEnums.SelphIDDocumentType.DriversLicense.rawValue:
                 currentSelphIDWidget.scanType = FPhiSelphIDWidgetDocumentType.DTDriversLicense
                 break
             case SelphidEnums.SelphIDDocumentType.ForeignCard.rawValue:
@@ -446,10 +449,10 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol
 
                         channel.sendMessage(json)*/
                         
-                        if let eventViewCtrl: FlutterViewController = self.getFlutterViewController() {
+                        if let binaryMessenger = self.binaryMessenger {
                             let channel = FlutterBasicMessageChannel(
                             name: "onSelphidLogEvent",
-                            binaryMessenger: eventViewCtrl.binaryMessenger,
+                            binaryMessenger: binaryMessenger,
                             codec: FlutterStringCodec.sharedInstance())
 
                             channel.sendMessage(json)
@@ -463,17 +466,5 @@ extension SwiftSelphIdPlugin: FPhiSelphIDWidgetProtocol
         }
     }
     
-    public func getFlutterViewController() -> FlutterViewController? {
-        let root = (UIApplication.shared.keyWindow?.rootViewController)!
-        let eventViewCtrl = root.presentedViewController ?? root
 
-        if let result = root as? FlutterViewController {
-            return result
-        }
-        else if let result = eventViewCtrl as? FlutterViewController {
-            return result
-        }
-
-       return nil
-    }
 }

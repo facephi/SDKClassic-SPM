@@ -9,8 +9,10 @@ import Foundation
 
 public struct InitSessionRequest: Encodable {
     var sessionId: String
+    var environment: String
 
-    public init(sessionId: String) {
+    public init(sessionId: String, environment: Environment) {
         self.sessionId = sessionId
+        self.environment = environment.rawValue
     }
 }

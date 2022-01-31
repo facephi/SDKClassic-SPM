@@ -1,26 +1,29 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_module/environment.dart';
 import 'package:auth_plugin/auth_service.dart';
 import 'package:chopper/chopper.dart';
 
 class AuthClientBuilder {
   static ChopperClient buildChopperClient(
-          List<ChopperService> services, String baseUrl) =>
+          List<ChopperService> services, String baseUrl, String authClient) =>
       ChopperClient(
           converter: FormUrlEncodedConverter(),
           interceptors: [
-        AuthInterceptor(),
+        AuthInterceptor(authClient),
         HttpLoggingInterceptor(),
         CurlInterceptor(),
       ], baseUrl: baseUrl, services: services);
 
-  static ChopperClient buildChopperClientSimple(String baseUrl) =>
-      buildChopperClient([AuthService.create()], baseUrl);
+  static ChopperClient buildChopperClientSimple(String baseUrl, String authClient) =>
+      buildChopperClient([AuthService.create()], baseUrl, authClient);
 }
 
 class AuthInterceptor implements RequestInterceptor {
+  String authClient;
+
+  AuthInterceptor(this.authClient);
+
   @override
   FutureOr<Request> onRequest(Request request) async {
     final headers = Map<String, String>.from(request.headers);
@@ -28,7 +31,7 @@ class AuthInterceptor implements RequestInterceptor {
     headers['Content-Type'] = 'application/x-www-form-urlencoded';
     headers['scope'] = 'openid';
     headers['grant_type'] = 'client_credentials';
-    headers['Authorization'] = 'Basic ' + base64Encode(utf8.encode(Environment.getAuthClient()));
+    headers['Authorization'] = 'Basic ' + base64Encode(utf8.encode(authClient));
     return request.copyWith(headers: headers);
   }
 }

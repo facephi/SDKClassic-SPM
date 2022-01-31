@@ -10,13 +10,13 @@
     <dependency>
       <groupId>com.facephi</groupId>
       <artifactId>fphi-core-widget</artifactId>
-      <version>5.7.2</version>
+      <version>5.7.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.facephi</groupId>
       <artifactId>fphi-selphi-widget</artifactId>
-      <version>5.7.2</version>
+      <version>5.7.3</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

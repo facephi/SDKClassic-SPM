@@ -22,7 +22,7 @@ class SelphidEnums {
      enum SelphIDDocumentType: String, Codable {
         case IDCard = "DT_IDCard"
         case Passport = "DT_Passport"
-        case DriverLicense = "DT_DriverLicense"
+        case DriversLicense = "DT_DriversLicense"
         case ForeignCard = "DT_ForeignCard"
         case CreditCard = "DT_CreditCard"
         case Custom = "DT_Custom"

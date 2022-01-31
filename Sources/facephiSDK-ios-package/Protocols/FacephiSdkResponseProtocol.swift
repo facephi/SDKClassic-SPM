@@ -23,8 +23,6 @@ public protocol FacephiSdkResponseProtocol {
 }
 
 public extension FacephiSdkResponseProtocol {
-    func getInitSessionResponse(_ response: SdkResponse) {}
-    func getInitOperationResponse(_ response: SdkResponse) {}
     func getSelphiResponse(_ response: SdkResponse) {}
     func getSelphIdResponse(_ response: SdkResponse) {}
     func getTrackingResponse(_ response: SdkResponse) {}
@@ -34,5 +32,4 @@ public extension FacephiSdkResponseProtocol {
     func getSetCustomerIdResponse(_ response: SdkResponse) {}
     func getOnboardingResponse(_ response: SdkResponse) {}
     func getAuthenticationResponse(_ response: SdkResponse) {}
-    func getTrackingErrorResponse(_ response: SdkResponse) {}
 }

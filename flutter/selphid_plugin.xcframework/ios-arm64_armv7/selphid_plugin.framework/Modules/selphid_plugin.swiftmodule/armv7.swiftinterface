@@ -20,5 +20,4 @@ extension selphid_plugin.SwiftSelphIdPlugin : FPhiSelphIDWidgetiOS.FPhiSelphIDWi
   @objc dynamic public func captureCancelled()
   @objc dynamic public func captureTimeout()
   @objc dynamic public func onEvent(_ time: Foundation.Date?, type: Swift.String?, info: Swift.String?)
-  public func getFlutterViewController() -> Flutter.FlutterViewController?
 }

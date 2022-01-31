@@ -1,14 +1,14 @@
-typealias invokeMethodType = (_ methodName: String, _ args: String?, _ checkNetwork: Bool) -> Void
-typealias responseMethodType = (_ args: String) -> Void
-typealias errorResponseMethodType = (_ args: Int) -> Void
+public typealias invokeMethodType = (_ methodName: String, _ responseMethodName: String, _ args: String?, _ checkNetwork: Bool) -> Void
+public typealias responseMethodType = (_ args: String) -> Void
+public typealias errorResponseMethodType = (_ args: Int) -> Void
 
-struct MethodChannel {
+public struct MethodChannel {
     // MARK: - VARS
-    var invokeMethodName: String?
-    var responseMethodName: String
-    var invokeMethodHandler: invokeMethodType?
-    var responseMethodHandler: responseMethodType
-    var errorResponseMethodHandler: errorResponseMethodType?
+    public var invokeMethodName: String?
+    public var responseMethodName: String
+    public var invokeMethodHandler: invokeMethodType?
+    public var responseMethodHandler: responseMethodType
+    public var errorResponseMethodHandler: errorResponseMethodType?
 
     // MARK: - INIT
     init(_ invokeMethodName: String?, _ responseMethodName: String, _ invokeMethodHandler: invokeMethodType?, _ responseMethodHandler: @escaping responseMethodType, _ errorResponseMethodHandler: errorResponseMethodType?) {

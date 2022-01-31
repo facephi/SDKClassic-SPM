@@ -42,7 +42,7 @@ public struct SelphIdConfiguration: Codable {
     var fullscreen = true
     var tokenImageQuality = 0.5
     var locale = ""
-    var documentType = SelphIDDocumentType.DT_IDCARD.rawValue
+    public var documentType = SelphIDDocumentType.DT_IDCARD.rawValue
     var timeout = SelphIDTimeout.T_SHORT.rawValue
     var enableWidgetEventListener = false
     var generateRawImages = false
@@ -51,7 +51,7 @@ public struct SelphIdConfiguration: Codable {
     var translationsContent = ""
     var viewsContent = ""
     var documentModels = ""
-    var license = ""
+    public var license = ""
 
     public init(debug: Bool,
                 showResultAfterCapture: Bool,

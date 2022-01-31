@@ -48,14 +48,13 @@ class FlutterChannel {
 
 // MARK: - ChannelProtocol
 extension FlutterChannel: ChannelProtocol {
-    func invoke(method: String, withArguments arguments: String?, andCheckNetwork checkNetwork: Bool = true) {
+    func invoke(method: String, responseMethod: String, withArguments arguments: String?, andCheckNetwork checkNetwork: Bool = true) {
         if checkNetwork, !networkStatusProvider.isNetworkAvailable {
-            delegate.handlerChannelErrorResponse(method: method, errorArguments: ErrorType.NETWORK_CONNECTION.rawValue)
+            delegate.handlerChannelErrorResponse(method: responseMethod, errorArguments: ErrorType.NETWORK_CONNECTION.rawValue)
         } else {
             DispatchQueue.main.async { [weak self] in
                 self?.methodChannel.invokeMethod(method, arguments: arguments, result: nil)
             }
         }
     }
-
 }

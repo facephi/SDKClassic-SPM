@@ -11,10 +11,13 @@ public class SwiftSelphiFacePlugin: NSObject, FlutterPlugin {
     var enableGenerateTemplateRaw: Bool = false
     var enableWidgetEventQRListener: Bool = false
     var isQRValid: Bool = false
+    var binaryMessenger: FlutterBinaryMessenger?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "selphi_face_plugin", binaryMessenger: registrar.messenger())
+        let binaryMessenger = registrar.messenger()
+        let channel = FlutterMethodChannel(name: "selphi_face_plugin", binaryMessenger: binaryMessenger)
         let instance = SwiftSelphiFacePlugin()
+        instance.binaryMessenger = binaryMessenger
         
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
@@ -263,13 +266,11 @@ extension SwiftSelphiFacePlugin: FPhiWidgetProtocol {
             formatter.dateStyle = .short
             let timeDouble = NSNumber(value: time!.timeIntervalSince1970)
             let stringEvent = String(format: "{\"selphiLogInfo\":{\"time\":\"%@\", \"type\":\"%@\", \"info\":\"%@\"}}", timeDouble.stringValue, type!, info!)
-            
-            DispatchQueue.main.async {
-                // let eventViewCtrl: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
-                if let eventViewCtrl: FlutterViewController = self.getFlutterViewController() {
+            if let binaryMessenger = self.binaryMessenger {
+                DispatchQueue.main.async {
                     let channel = FlutterBasicMessageChannel(
                         name: "onSelphiLogEvent",
-                        binaryMessenger: eventViewCtrl.binaryMessenger,
+                        binaryMessenger: binaryMessenger,
                         codec: FlutterStringCodec.sharedInstance())
 
                     channel.sendMessage(stringEvent)
@@ -281,12 +282,11 @@ extension SwiftSelphiFacePlugin: FPhiWidgetProtocol {
     public func qrValidator(_ qrData: String?) -> Bool {
         if self.enableWidgetEventQRListener {
             print(String(format: "qrData: %@", qrData!))
-            DispatchQueue.main.async {
-                // let eventViewCtrl: UIViewController = (UIApplication.shared.keyWindow?.rootViewController)!
-                if let eventViewCtrl: FlutterViewController = self.getFlutterViewController() {
+            if let binaryMessenger = self.binaryMessenger {
+                DispatchQueue.main.async {
                     let channel = FlutterBasicMessageChannel(
                         name: "onSelphiLogQREvent",
-                        binaryMessenger: eventViewCtrl.binaryMessenger,
+                        binaryMessenger: binaryMessenger,
                         codec: FlutterStringCodec.sharedInstance())
 
                     let stringEvent = String(format: "{\"qrData\":\"%@\"}", qrData!)
@@ -307,18 +307,5 @@ extension SwiftSelphiFacePlugin: FPhiWidgetProtocol {
             return true
         }
         return false
-    }
-    
-    public func getFlutterViewController() -> FlutterViewController? {
-        let root = (UIApplication.shared.keyWindow?.rootViewController)!
-        let eventViewCtrl = root.presentedViewController ?? root
-
-        if let result = root as? FlutterViewController {
-            return result
-        } else if let result = eventViewCtrl as? FlutterViewController {
-            return result
-        }
-
-        return nil
     }
 }

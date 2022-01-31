@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
-  <info organisation="com.selphi.flutter.plugin.selphi_face_plugin" module="selphi_face_plugin" revision="1.0" status="integration" publication="20220119132235"/>
+  <info organisation="com.selphi.flutter.plugin.selphi_face_plugin" module="selphi_face_plugin" revision="1.0" status="integration" publication="20220128130458"/>
   <configurations>
     <conf name="_internal_aapt2_binary" visibility="private" transitive="false"/>
     <conf name="androidApis" visibility="public"/>
@@ -177,16 +177,16 @@
     <dependency org="io.flutter" name="flutter_embedding_debug" rev="1.0.0-40a99c595137e4b2f5b2efa8ff343ea23c1e16b8" conf="debugApi-&gt;default"/>
     <dependency org="com.selphi.flutter.plugin.selphi_face_plugin" name="selphi_face_plugin" rev="1.0" conf="debugUnitTestCompileClasspath-&gt;default"/>
     <dependency org="com.selphi.flutter.plugin.selphi_face_plugin" name="selphi_face_plugin" rev="1.0" conf="debugUnitTestRuntimeClasspath-&gt;default"/>
-    <dependency org="com.facephi" name="fphi-core-widget" rev="5.7.2" conf="implementation-&gt;default"/>
-    <dependency org="com.facephi" name="fphi-selphi-widget" rev="5.7.2" conf="implementation-&gt;default"/>
+    <dependency org="com.facephi" name="fphi-core-widget" rev="5.7.3" conf="implementation-&gt;default"/>
+    <dependency org="com.facephi" name="fphi-selphi-widget" rev="5.7.3" conf="implementation-&gt;default"/>
     <dependency org="com.google.code.gson" name="gson" rev="2.8.9" conf="implementation-&gt;default"/>
     <dependency org="com.android.tools.lint" name="lint-gradle" rev="27.1.0" conf="lintClassPath-&gt;default"/>
     <dependency org="io.flutter" name="flutter_embedding_profile" rev="1.0.0-40a99c595137e4b2f5b2efa8ff343ea23c1e16b8" conf="profileApi-&gt;default"/>
     <dependency org="com.selphi.flutter.plugin.selphi_face_plugin" name="selphi_face_plugin" rev="1.0" conf="profileUnitTestCompileClasspath-&gt;default"/>
     <dependency org="com.selphi.flutter.plugin.selphi_face_plugin" name="selphi_face_plugin" rev="1.0" conf="profileUnitTestRuntimeClasspath-&gt;default"/>
     <dependency org="io.flutter" name="flutter_embedding_release" rev="1.0.0-40a99c595137e4b2f5b2efa8ff343ea23c1e16b8" conf="releaseApi-&gt;default"/>
-    <dependency org="com.facephi" name="fphi-core-widget" rev="5.7.2" transitive="false" conf="releaseCompileClasspath-&gt;default"/>
-    <dependency org="com.facephi" name="fphi-selphi-widget" rev="5.7.2" transitive="false" conf="releaseCompileClasspath-&gt;default"/>
+    <dependency org="com.facephi" name="fphi-core-widget" rev="5.7.3" transitive="false" conf="releaseCompileClasspath-&gt;default"/>
+    <dependency org="com.facephi" name="fphi-selphi-widget" rev="5.7.3" transitive="false" conf="releaseCompileClasspath-&gt;default"/>
     <dependency org="com.google.code.gson" name="gson" rev="2.8.9" transitive="false" conf="releaseCompileClasspath-&gt;default"/>
     <dependency org="io.flutter" name="flutter_embedding_release" rev="1.0.0-40a99c595137e4b2f5b2efa8ff343ea23c1e16b8" transitive="false" conf="releaseCompileClasspath-&gt;default"/>
     <dependency org="androidx.lifecycle" name="lifecycle-common" rev="2.2.0" transitive="false" conf="releaseCompileClasspath-&gt;default"/>

@@ -22,5 +22,4 @@ extension selphi_face_plugin.SwiftSelphiFacePlugin : FPhiWidgetCore.FPhiWidgetPr
   @objc dynamic public func extractionTimeout()
   @objc dynamic public func onEvent(_ time: Foundation.Date?, type: Swift.String?, info: Swift.String?)
   @objc dynamic public func qrValidator(_ qrData: Swift.String?) -> Swift.Bool
-  public func getFlutterViewController() -> Flutter.FlutterViewController?
 }

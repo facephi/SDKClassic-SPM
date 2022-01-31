@@ -7,10 +7,10 @@
 
 import Foundation
 
-class MethodsFactory
+public class MethodsFactory
 {
     // MARK: - Enum
-    enum InitMethodName: String
+    public enum InitMethodName: String
     {
         case initSession
         case initOperation
@@ -46,13 +46,13 @@ class MethodsFactory
     private var channel: ChannelProtocol!
 
     // MARK: - INIT
-    init(channel: ChannelProtocol)
+    public init(channel: ChannelProtocol)
     {
         self.channel = channel
     }
 
     // MARK: - FUNC
-    func createMethods(delegate: FacephiSdkResponseProtocol)
+    public func createMethods(delegate: FacephiSdkResponseProtocol)
     {
         let methodSession = MethodChannel(InitMethodName.initSession.rawValue,
                                           FinishMethodName.initSessionFinished.rawValue,
@@ -115,7 +115,9 @@ class MethodsFactory
                                               { args in
                                                   delegate.getGenerateRawTemplateResponse(args)
                                               },
-                                              nil)
+                                              { _ in
+                                                  delegate.getGenerateRawTemplateResponse("")
+                                              })
         methods.append(methodRawTemplate)
 
         let methodCloseSession = MethodChannel(InitMethodName.closeSessionMethod.rawValue,
@@ -134,7 +136,10 @@ class MethodsFactory
                                            channel.invoke,
                                            { args in
                                                delegate.getTokenizedString(args)
-                                           }, nil)
+                                           },
+                                           { _ in
+                                               delegate.getTokenizedString("")
+                                           })
         methods.append(methodTokenize)
 
         let methodSetCustomerId = MethodChannel(InitMethodName.customerTracking.rawValue,
@@ -182,12 +187,12 @@ class MethodsFactory
     }
 
     // MARK: - STATIC
-    func getMethodChannel(byInvokeMethodName: String) -> MethodChannel?
+    public func getMethodChannel(byInvokeMethodName: String) -> MethodChannel?
     {
         return methods.first(where: { $0.invokeMethodName == byInvokeMethodName })
     }
 
-    func getMethodChannel(byResponseMethodName: String) -> MethodChannel?
+    public func getMethodChannel(byResponseMethodName: String) -> MethodChannel?
     {
         return methods.first(where: { $0.responseMethodName == byResponseMethodName })
     }

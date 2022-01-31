@@ -144,7 +144,7 @@ Especificado en la clase `SelphIDDocumentType`:
 
 - **IDCard**: Establece que se capturarán documentos de identidad o tarjetas.
 - **Passport**: Establece que se capturarán pasaportes.
-- **DriverLicense**: Establece que se capturarán licencias de conducir.
+- **DriversLicense**: Establece que se capturarán licencias de conducir.
 - **CreditCard**: Establece que se capturarán tarjetas de crédito.
 
 #### 2.2.8. TokenImageQuality (*double*)
