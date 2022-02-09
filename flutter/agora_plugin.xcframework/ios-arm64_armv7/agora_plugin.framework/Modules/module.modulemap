@@ -1,0 +1,11 @@
+framework module agora_plugin {
+  umbrella header "agora_plugin-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module agora_plugin.Swift {
+    header "agora_plugin-Swift.h"
+    requires objc
+}

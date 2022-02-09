@@ -8,33 +8,80 @@ import SystemConfiguration
 import UIKit
 import _Concurrency
 @_exported import bridge_plugin
-extension Swift.Encodable {
-  public var json: Swift.String? {
+public class AuthenticationRequest : Swift.Encodable {
+  public init(operationId: Swift.String, customerId: Swift.String, selphiConfigurationData: bridge_plugin.SelphiConfiguration)
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public protocol ChannelProtocol {
+  func invoke(method: Swift.String, responseMethod: Swift.String, withArguments arguments: Swift.String?, andCheckNetwork checkNetwork: Swift.Bool)
+  var channelName: Swift.String { get }
+  var networkStatusProvider: bridge_plugin.NetworkStatusProviderProtocol! { get }
+  var delegate: bridge_plugin.ChannelResponseProtocol! { get set }
+}
+public protocol ChannelResponseProtocol {
+  func handlerChannelResponse(method: Swift.String, arguments: Swift.String)
+  func handlerChannelErrorResponse(method: Swift.String, errorArguments: Swift.Int)
+}
+public enum CustomEngine : Swift.String {
+  case DEFAULT
+  case VIDEO
+  public var value: Flutter.FlutterEngine {
     get
   }
-}
-public enum FinishStatus : Swift.Int {
-  case STATUS_OK
-  case STATUS_ERROR
-  case STATUS_CANCEL_BY_USER
-  case STATUS_TIMEOUT
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-public enum OnboardingType : Swift.String {
-  case ONBOARDING
-  case AUTHENTICATION
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
 }
+public enum Document : Swift.String, Swift.CaseIterable {
+  case ID
+  case DRIVER
+  case PASSPORT
+  public var documentType: bridge_plugin.SelphIDDocumentType {
+    get
+  }
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [bridge_plugin.Document]
+  public typealias RawValue = Swift.String
+  public static var allCases: [bridge_plugin.Document] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension Swift.Encodable {
+  public var json: Swift.String? {
+    get
+  }
+}
+public enum Environment : Swift.String, Swift.CaseIterable {
+  case DEV
+  case STG
+  case PRO
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [bridge_plugin.Environment]
+  public typealias RawValue = Swift.String
+  public static var allCases: [bridge_plugin.Environment] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
 public enum ErrorType : Swift.Int {
-  case NETWORK_CONNECTION_ERROR
+  case TRACK_CUSTOMER_ID_ERROR
+  case TRACK_EXTERNAL_EVENT_ERROR
+  case TRACK_SELPHID_ERROR
+  case TRACK_SELPHI_ERROR
+  case TRACK_START_ERROR
+  case TRACK_COORDINATES_ERROR
+  case TRACK_DEVICE_ERROR
+  case INIT_SESSION_ERROR
+  case INIT_PROCESS_ERROR
+  case NETWORK_CONNECTION
   case TE_UNKNOWN_ERROR
   case TE_NO_ERROR
   case TE_CAMERA_PERMISSION_DENIED
@@ -50,59 +97,174 @@ public enum ErrorType : Swift.Int {
     get
   }
 }
-public class FacephiSdkManager {
+open class FacephiSdkManager {
   public var delegate: bridge_plugin.FacephiSdkResponseProtocol? {
     get
     set
   }
-  public init()
+  public init(withChannel channel: bridge_plugin.ChannelProtocol)
+  public func show(_ engine: Flutter.FlutterEngine, from viewController: UIKit.UIViewController)
   @objc deinit
 }
 extension bridge_plugin.FacephiSdkManager : bridge_plugin.FacephiSdkRequestProtocol {
-  public func tokenize(_ data: Swift.String)
+  public func setCustomerId(_ customerId: Swift.String)
+  public func tokenize(_ tokenizeData: bridge_plugin.TokenizeData)
   public func initSession(withRequest request: bridge_plugin.InitSessionRequest)
-  public func initOnboardingProcess(withRequest request: bridge_plugin.InitOnboardingRequest)
+  public func initOperation(withRequest request: bridge_plugin.InitOperationRequest)
+  public func launchOnboarding(withRequest request: bridge_plugin.OnboardingRequest)
+  public func launchAuthentication(withRequest request: bridge_plugin.AuthenticationRequest)
   public func launchSelphi(_ configuration: bridge_plugin.SelphiConfiguration)
   public func launchSelphId(_ configuration: bridge_plugin.SelphIdConfiguration)
   public func launchTracking(_ trackingData: bridge_plugin.TrackingData)
   public func generateRawTemplate(imageBase64: Swift.String)
   public func closeSession()
+  @objc dynamic open func videoCall(from viewController: UIKit.UIViewController)
+}
+extension bridge_plugin.FacephiSdkManager : bridge_plugin.ChannelResponseProtocol {
+  public func handlerChannelResponse(method: Swift.String, arguments: Swift.String)
+  public func handlerChannelErrorResponse(method: Swift.String, errorArguments: Swift.Int)
 }
 public protocol FacephiSdkRequestProtocol : AnyObject {
   var delegate: bridge_plugin.FacephiSdkResponseProtocol? { get set }
   func initSession(withRequest request: bridge_plugin.InitSessionRequest)
-  func initOnboardingProcess(withRequest request: bridge_plugin.InitOnboardingRequest)
+  func initOperation(withRequest request: bridge_plugin.InitOperationRequest)
+  func launchOnboarding(withRequest request: bridge_plugin.OnboardingRequest)
+  func launchAuthentication(withRequest request: bridge_plugin.AuthenticationRequest)
   func launchSelphi(_ configuration: bridge_plugin.SelphiConfiguration)
   func launchSelphId(_ configuration: bridge_plugin.SelphIdConfiguration)
   func launchTracking(_ trackingData: bridge_plugin.TrackingData)
   func generateRawTemplate(imageBase64: Swift.String)
   func closeSession()
-  func tokenize(_ data: Swift.String)
+  func tokenize(_ tokenizeData: bridge_plugin.TokenizeData)
+  func setCustomerId(_ customerId: Swift.String)
+  func videoCall(from viewController: UIKit.UIViewController)
 }
 public protocol FacephiSdkResponseProtocol {
   func getInitSessionResponse(_ response: bridge_plugin.SdkResponse)
-  func getInitOnboardingProcessResponse(_ response: bridge_plugin.SdkResponse)
-  func getSelphiResponse(_ response: bridge_plugin.SelphiResponse)
-  func getSelphIdResponse(_ response: bridge_plugin.SelphidResponse)
+  func getInitOperationResponse(_ response: bridge_plugin.SdkResponse)
+  func getSelphiResponse(_ response: bridge_plugin.SdkResponse)
+  func getSelphIdResponse(_ response: bridge_plugin.SdkResponse)
   func getTrackingResponse(_ response: bridge_plugin.SdkResponse)
   func getGenerateRawTemplateResponse(_ response: Swift.String)
   func getCloseSessionResponse(_ response: bridge_plugin.SdkResponse)
   func getTokenizedString(_ response: Swift.String)
+  func getSetCustomerIdResponse(_ response: bridge_plugin.SdkResponse)
+  func getOnboardingResponse(_ response: bridge_plugin.SdkResponse)
+  func getAuthenticationResponse(_ response: bridge_plugin.SdkResponse)
+  func getTrackingErrorResponse(_ response: bridge_plugin.SdkResponse)
+  func getVideoCallResponse(_ response: bridge_plugin.SdkResponse)
 }
-public struct InitOnboardingRequest : Swift.Encodable {
-  public init(onboardingId: Swift.String, onboardingType: bridge_plugin.OnboardingType)
+extension bridge_plugin.FacephiSdkResponseProtocol {
+  public func getSelphiResponse(_ response: bridge_plugin.SdkResponse)
+  public func getSelphIdResponse(_ response: bridge_plugin.SdkResponse)
+  public func getTrackingResponse(_ response: bridge_plugin.SdkResponse)
+  public func getGenerateRawTemplateResponse(_ response: Swift.String)
+  public func getCloseSessionResponse(_ response: bridge_plugin.SdkResponse)
+  public func getTokenizedString(_ response: Swift.String)
+  public func getSetCustomerIdResponse(_ response: bridge_plugin.SdkResponse)
+  public func getOnboardingResponse(_ response: bridge_plugin.SdkResponse)
+  public func getAuthenticationResponse(_ response: bridge_plugin.SdkResponse)
+  public func getVideoCallResponse(_ response: bridge_plugin.SdkResponse)
+}
+public enum FinishStatus : Swift.Int {
+  case STATUS_OK
+  case STATUS_ERROR
+  case STATUS_CANCEL_BY_USER
+  case STATUS_TIMEOUT
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public class FlutterChannel {
+  final public let channelName: Swift.String
+  public var networkStatusProvider: bridge_plugin.NetworkStatusProviderProtocol!
+  public var delegate: bridge_plugin.ChannelResponseProtocol!
+  public init(networkStatusProvider: bridge_plugin.NetworkStatusProviderProtocol, engine: Flutter.FlutterEngine)
+  @objc deinit
+}
+extension bridge_plugin.FlutterChannel : bridge_plugin.ChannelProtocol {
+  public func invoke(method: Swift.String, responseMethod: Swift.String, withArguments arguments: Swift.String?, andCheckNetwork checkNetwork: Swift.Bool = true)
+}
+public struct InitOperationRequest : Swift.Encodable {
+  public init(operationId: Swift.String, type: bridge_plugin.ProcessType)
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct InitSessionRequest : Swift.Encodable {
-  public init(sessionId: Swift.String, customerId: Swift.String)
+  public init(sessionId: Swift.String, environment: bridge_plugin.Environment)
   public func encode(to encoder: Swift.Encoder) throws
 }
-@_hasMissingDesignatedInitializers public class NetworkStatus {
+public typealias invokeMethodType = (_ methodName: Swift.String, _ responseMethodName: Swift.String, _ args: Swift.String?, _ checkNetwork: Swift.Bool) -> Swift.Void
+public typealias responseMethodType = (_ args: Swift.String) -> Swift.Void
+public typealias errorResponseMethodType = (_ args: Swift.Int) -> Swift.Void
+public struct MethodChannel {
+  public var invokeMethodName: Swift.String?
+  public var responseMethodName: Swift.String
+  public var invokeMethodHandler: bridge_plugin.invokeMethodType?
+  public var responseMethodHandler: bridge_plugin.responseMethodType
+  public var errorResponseMethodHandler: bridge_plugin.errorResponseMethodType?
+}
+public class MethodsFactory {
+  public enum InitMethodName : Swift.String {
+    case initSession
+    case initOperation
+    case initSelphi
+    case initSelphid
+    case onboarding
+    case authentication
+    case addTracking
+    case generateRawTemplate
+    case closeSessionMethod
+    case tokenize
+    case customerTracking
+    case videoCall
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public init(channel: bridge_plugin.ChannelProtocol)
+  public func createMethods(delegate: bridge_plugin.FacephiSdkResponseProtocol)
+  public func getMethodChannel(byInvokeMethodName: Swift.String) -> bridge_plugin.MethodChannel?
+  public func getMethodChannel(byResponseMethodName: Swift.String) -> bridge_plugin.MethodChannel?
   @objc deinit
+}
+public protocol NetworkStatusProviderProtocol {
+  var isNetworkAvailable: Swift.Bool { get }
+}
+public class NetworkStatus : bridge_plugin.NetworkStatusProviderProtocol {
+  public var isNetworkAvailable: Swift.Bool {
+    get
+  }
+  public init()
+  @objc deinit
+}
+public class OnboardingRequest : Swift.Codable {
+  public init(operationId: Swift.String, customerId: Swift.String, selphiConfigurationData: bridge_plugin.SelphiConfiguration, selphIdConfigurationData: bridge_plugin.SelphIdConfiguration)
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
+}
+public enum ProcessType : Swift.String {
+  case ONBOARDING
+  case AUTHENTICATION
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
 }
 public struct SdkResponse : Swift.Codable {
   public var finishStatus: Swift.Int
-  public var errorType: Swift.Int?
+  public var errorType: Swift.Int
+  public var selphiResponse: bridge_plugin.SelphiResponse?
+  public var selphIdResponse: bridge_plugin.SelphIdResponse?
+  public init(withErrorType: Swift.Int)
+  public init(withFinishStatus: Swift.Int)
+  public init(withFinishStatus: Swift.Int, andErrorType: Swift.Int)
+  public init()
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
@@ -164,21 +326,25 @@ public enum SelphIDCompressFormat : Swift.String {
   }
 }
 public struct SelphIdConfiguration : Swift.Codable {
+  public var documentType: Swift.String
+  public var license: Swift.String
   public init(debug: Swift.Bool, showResultAfterCapture: Swift.Bool, showTutorial: Swift.Bool, scanMode: Swift.String, specificData: Swift.String, fullscreen: Swift.Bool, tokenImageQuality: Swift.Double, locale: Swift.String, documentType: Swift.String, timeout: Swift.String, enableWidgetEventListener: Swift.Bool, generateRawImages: Swift.Bool, compressFormat: Swift.String, imageQuality: Swift.Int, translationsContent: Swift.String, viewsContent: Swift.String, documentModels: Swift.String, license: Swift.String)
   public init()
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public struct SelphidResponse : Swift.Codable {
-  public var finishStatus: Swift.Int
-  public var errorType: Swift.Int
+public struct SelphIdResponse : Swift.Codable {
+  public var shortDescription: Swift.String {
+    get
+  }
   public init(from decoder: Swift.Decoder) throws
   public init()
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct SelphiResponse : Swift.Codable {
-  public var finishStatus: Swift.Int
-  public var errorDiagnostic: Swift.Int
+  public var shortDescription: Swift.String {
+    get
+  }
   public init()
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
@@ -189,20 +355,60 @@ public struct SelphiResponse : Swift.Codable {
   @objc override dynamic public init()
   @objc deinit
 }
-public struct TrackingData : Swift.Codable {
-  public init(screen: Swift.String, event: Swift.String)
+public struct TokenizeData : Swift.Codable {
+  public init(sessionId: Swift.String, operationId: Swift.String, family: bridge_plugin.ProcessType)
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-extension bridge_plugin.FinishStatus : Swift.Equatable {}
-extension bridge_plugin.FinishStatus : Swift.Hashable {}
-extension bridge_plugin.FinishStatus : Swift.RawRepresentable {}
-extension bridge_plugin.OnboardingType : Swift.Equatable {}
-extension bridge_plugin.OnboardingType : Swift.Hashable {}
-extension bridge_plugin.OnboardingType : Swift.RawRepresentable {}
+public struct TrackingData : Swift.Codable {
+  public init(screen: Swift.String, event: bridge_plugin.TrackingDataEvent)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public enum TrackingDataEvent : Swift.String {
+  case SCREEN_ACCESS
+  case CLICK_BUTTON
+  case STATE
+  case STATE_CHANGE
+  case STEP_CHANGE
+  case AUTHENTICATION_RESULT
+  case EXPIRED_BY_SCHEDULERCLICK
+  case SWIPE
+  case LICENSE_ERROR
+  case AUTO_CONFIGURE
+  case WIDGET_EXCEPTION
+  case FEATURE_NOT_SUPPORTED
+  case RECORDING
+  case RECORDING_FILE
+  case RECORDING_ERROR
+  case ONBOARDING_RESULT
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension bridge_plugin.CustomEngine : Swift.Equatable {}
+extension bridge_plugin.CustomEngine : Swift.Hashable {}
+extension bridge_plugin.CustomEngine : Swift.RawRepresentable {}
+extension bridge_plugin.Document : Swift.Equatable {}
+extension bridge_plugin.Document : Swift.Hashable {}
+extension bridge_plugin.Document : Swift.RawRepresentable {}
+extension bridge_plugin.Environment : Swift.Equatable {}
+extension bridge_plugin.Environment : Swift.Hashable {}
+extension bridge_plugin.Environment : Swift.RawRepresentable {}
 extension bridge_plugin.ErrorType : Swift.Equatable {}
 extension bridge_plugin.ErrorType : Swift.Hashable {}
 extension bridge_plugin.ErrorType : Swift.RawRepresentable {}
+extension bridge_plugin.FinishStatus : Swift.Equatable {}
+extension bridge_plugin.FinishStatus : Swift.Hashable {}
+extension bridge_plugin.FinishStatus : Swift.RawRepresentable {}
+extension bridge_plugin.MethodsFactory.InitMethodName : Swift.Equatable {}
+extension bridge_plugin.MethodsFactory.InitMethodName : Swift.Hashable {}
+extension bridge_plugin.MethodsFactory.InitMethodName : Swift.RawRepresentable {}
+extension bridge_plugin.ProcessType : Swift.Equatable {}
+extension bridge_plugin.ProcessType : Swift.Hashable {}
+extension bridge_plugin.ProcessType : Swift.RawRepresentable {}
 extension bridge_plugin.SelphiFaceLivenessMode : Swift.Equatable {}
 extension bridge_plugin.SelphiFaceLivenessMode : Swift.Hashable {}
 extension bridge_plugin.SelphiFaceLivenessMode : Swift.RawRepresentable {}
@@ -218,3 +424,6 @@ extension bridge_plugin.SelphIDScanMode : Swift.RawRepresentable {}
 extension bridge_plugin.SelphIDCompressFormat : Swift.Equatable {}
 extension bridge_plugin.SelphIDCompressFormat : Swift.Hashable {}
 extension bridge_plugin.SelphIDCompressFormat : Swift.RawRepresentable {}
+extension bridge_plugin.TrackingDataEvent : Swift.Equatable {}
+extension bridge_plugin.TrackingDataEvent : Swift.Hashable {}
+extension bridge_plugin.TrackingDataEvent : Swift.RawRepresentable {}
