@@ -27,7 +27,7 @@ let package = Package(
 
         .binaryTarget(name: "device_info_plus", path: "Frameworks/device_info_plus.xcframework"),
        // .binaryTarget(name: "Flutter", path: "Frameworks/Flutter.xcframework"),
-        .binaryTarget(name: "Flutter",url:  "https://dev-ctlzip-s3.s3.eu-west-1.amazonaws.com/sdk-flutter/ios+/Flutter.xcframework.zip",checksum: "4a946dfd90ffcf54d1400999828293eeab78c372858ee3e3416a6db4c1666170"),
+        .binaryTarget(name: "Flutter",url:  "https://dev-ctlzip-s3.s3.eu-west-1.amazonaws.com/sdk-flutter/ios+/Flutter.xcframework.zip",checksum: "77246f84719524d425fa43f337acf1c07284d94a305c28504ba11497ec55d39e"),
         .binaryTarget(name: "FlutterPluginRegistrant", path: "Frameworks/FlutterPluginRegistrant.xcframework"),
         .binaryTarget(name: "selphid_plugin", path: "Frameworks/selphid_plugin.xcframework"),
         .binaryTarget(name: "selphi_face_plugin", path: "Frameworks/selphi_face_plugin.xcframework"),
