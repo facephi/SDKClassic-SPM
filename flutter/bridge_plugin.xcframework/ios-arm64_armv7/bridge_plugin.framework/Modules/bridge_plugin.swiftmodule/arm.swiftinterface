@@ -355,24 +355,6 @@ public struct SelphIdConfiguration : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
 }
 public struct SelphIdResponse : Swift.Codable {
-  public var finishStatusDescription: Swift.String
-  public var documentData: [Swift.String : Swift.String]?
-  public var tokenBackDocument: Swift.String?
-  public var tokenFrontDocument: Swift.String?
-  public var tokenFaceImage: Swift.String?
-  public var tokenOCR: Swift.String?
-  public var documentCaptured: Swift.String?
-  public var matchingSidesScore: Swift.Float?
-  public var captureProgress: Swift.Int?
-  public var tokenRawFrontDocument: Swift.String?
-  public var tokenRawBackDocument: Swift.String?
-  public var frontDocumentImage: Swift.String?
-  public var faceImage: Swift.String?
-  public var signatureImage: Swift.String?
-  public var backDocumentImage: Swift.String?
-  public var fingerprintImage: Swift.String?
-  public var rawFrontDocument: Swift.String?
-  public var rawBackDocument: Swift.String?
   public var shortDescription: Swift.String {
     get
   }
@@ -381,13 +363,8 @@ public struct SelphIdResponse : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
 }
 public struct SelphiResponse : Swift.Codable {
-  public var errorMessage: Swift.String?
   public var templateRaw: Swift.String?
-  public var eyeGlassesScore: Swift.Double?
-  public var templateScore: Swift.Double?
-  public var qrData: Swift.String?
   public var bestImage: Swift.String?
-  public var bestImageCropped: Swift.String?
   public var shortDescription: Swift.String {
     get
   }
